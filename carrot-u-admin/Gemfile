@@ -29,15 +29,6 @@ gem 'jbuilder', '~> 2.7'
 # OKTA support 
 gem 'omniauth-saml'
 
-gem 'activerecord-session_store'
-gem 'devise'
-gem 'jwt'
-gem 'json'
-gem 'omniauth-oktaoauth'
-# gem 'figaro'
-
-
-
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
