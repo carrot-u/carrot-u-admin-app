@@ -1,0 +1,1 @@
+CarrotUAdmin::Application.config.session_store :cookie_store, key: '_carrot_u_admin_session', expires: 1.year.from_now
