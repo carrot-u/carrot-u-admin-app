@@ -5,3 +5,8 @@
   <p> 
     <%= link_to "Sign in", login_url, class: "btn btn-primary btn-lg", role: "button", id: "sign_in" %>
   </p>
+
+
+  <p>
+  <%= current_user&.email %>
+  </p>

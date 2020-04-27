@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
   skip_before_action :require_login
 
   def new
+    Rails.logger.warn("okta cert: #{ENV['OKTA_SAML_IDP_CERT']}")
     redirect_to "/auth/saml?redirectUrl=#{URI::encode(request.base_url)}"
   end
 
@@ -19,9 +20,9 @@ class SessionsController < ApplicationController
       redirect_path_from_session = session[:previous_url]
       session[:previous_url] = nil
     else
-      redirect_path_from_session = users_path
+      redirect_path_from_session = root_path
     end
-
+    
     email = email_from_provider.downcase
     
     unless email.end_with?('@instacart.com')
@@ -32,7 +33,6 @@ class SessionsController < ApplicationController
 
     user = User.find_by_email(email)
     session[:user_id] = user.id
-    user.update_attribute(:signed_in_at, Time.zone.now)
 
     redirect_to redirect_path_from_session
   end
@@ -58,7 +58,7 @@ class SessionsController < ApplicationController
     settings = OneLogin::RubySaml::Settings.new
     settings.issuer                         = ENV['OKTA_SAML_ISSUER'] || 'http://www.okta.com/exk3nfjulavskxsah357'
     settings.idp_sso_target_url             = ENV['OKTA_SAML_IDP_SSO_TARGET_URL'] || 'https://instacart.okta.com/app/instacart_carrotu_1/exk3nfjulavskxsah357/sso/saml'
-    settings.idp_cert                       = ENV['OKTA_SAML_IDP_CERT']
+    settings.idp_cert                       = ENV['OKTA_SAML_IDP_CERT'] # || File.read(Rails.root.join('conf/okta.cert'))
     settings.name_identifier_format         = "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress"
     settings
   end

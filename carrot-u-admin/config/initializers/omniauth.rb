@@ -1,6 +1,8 @@
 OmniAuth.config.logger = Rails.logger
 
-if File.exist?('/conf/okta.cert')
+if File.exist?(Rails.root.join('conf/okta.cert'))
+  ENV['OKTA_SAML_IDP_CERT'] = File.read(Rails.root.join('conf/okta.cert'))
+elsif File.exist?('/conf/okta.cert')
   ENV['OKTA_SAML_IDP_CERT'] = File.read('/conf/okta.cert')
 end
 
