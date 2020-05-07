@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_07_231142) do
+ActiveRecord::Schema.define(version: 2020_05_07_234120) do
 
   create_table "application_questions", force: :cascade do |t|
     t.text "text"
@@ -26,6 +26,28 @@ ActiveRecord::Schema.define(version: 2020_05_07_231142) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "course_session_users", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "course_session_id"
+    t.string "role"
+    t.boolean "notification_sent"
+    t.datetime "manager_approved_at"
+    t.datetime "accepted_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_session_id"], name: "index_course_session_users_on_course_session_id"
+    t.index ["user_id"], name: "index_course_session_users_on_user_id"
+  end
+
+  create_table "course_sessions", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "sessions", force: :cascade do |t|

@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: 
+  course_session: 
+  role: MyString
+  notification_sent: false
+  manager_approved_at: 2020-05-07 16:41:20
+  accepted_at: 2020-05-07 16:41:20
+
+two:
+  user: 
+  course_session: 
+  role: MyString
+  notification_sent: false
+  manager_approved_at: 2020-05-07 16:41:20
+  accepted_at: 2020-05-07 16:41:20
