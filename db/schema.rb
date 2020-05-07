@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_27_053922) do
+ActiveRecord::Schema.define(version: 2020_05_07_231142) do
+
+  create_table "application_questions", force: :cascade do |t|
+    t.text "text"
+    t.string "role"
+    t.boolean "current"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "authorizations", force: :cascade do |t|
     t.string "provider"
