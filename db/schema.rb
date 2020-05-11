@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2020_05_07_234120) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "application_questions", force: :cascade do |t|
     t.text "text"
     t.string "role"
@@ -29,8 +32,8 @@ ActiveRecord::Schema.define(version: 2020_05_07_234120) do
   end
 
   create_table "course_session_users", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "course_session_id"
+    t.bigint "user_id"
+    t.bigint "course_session_id"
     t.string "role"
     t.boolean "notification_sent"
     t.datetime "manager_approved_at"
