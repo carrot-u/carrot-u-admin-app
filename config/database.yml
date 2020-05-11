@@ -9,7 +9,7 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: 5
-  url: <%=  ENV.fetch("DATABASE_URL") %>
+  url: <%=  ENV.fetch("DATABASE_URL", "postgres://localhost:5432/carrot_u_admin") %>
 
 development:
   <<: *default
