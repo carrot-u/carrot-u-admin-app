@@ -5,14 +5,7 @@ class SessionsController < ApplicationController
   skip_before_action :require_login
 
   def new
-    Rails.logger.warn("okta cert: #{ENV['OKTA_SAML_IDP_CERT']}")
     redirect_to "/auth/saml?redirectUrl=#{URI::encode(request.base_url)}"
-  end
-
-  def dev
-    user = User.find_by_email(params[:email]) || User.first
-    session[:user_id] = user.id
-    redirect_to root_path
   end
 
   def create
@@ -31,7 +24,7 @@ class SessionsController < ApplicationController
       return
     end
 
-    user = User.find_by_email(email)
+    user = User.find_or_create_by(email: email)
     session[:user_id] = user.id
 
     redirect_to redirect_path_from_session
@@ -47,6 +40,7 @@ class SessionsController < ApplicationController
 
   def email_from_provider
     response = OneLogin::RubySaml::Response.new(params[:SAMLResponse], { skip_subject_confirmation: true, settings: saml_settings })
+    puts response
     if response.is_valid?
       response.name_id
     else
