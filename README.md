@@ -38,13 +38,26 @@ need to create the database for the project.
 Create the database:
 
 ```bash
-% createdb carrot_u_admin
+% createdb carrot_u_admin      # run the postgres command to create the db
 ```
 
 Run the migrations:
 
 ```bash
 % rake db:migrate
+```
+
+## Configure Okta
+
+There is an Okta certificate that you can use locally pinned in the #carrot-university channel. Create a /conf
+directory in your repo and add this certificate into that directory. For example, if you have downloaded to your
+`Downloads` directory:
+
+```bash
+% mkdir conf      # create the conf directory in ~/git/carrot-u-admin-app
+% cd conf         # go into the conf directory
+% cp ~/Downloads/okta.cert .   # copy the downloaded cert into this directory
+% cd ..           # move back to the main source code directory
 ```
 
 ## Configure Heroku
@@ -64,7 +77,7 @@ Install Heroku command line (CLI) with `brew`:
 Connect to the Heroku app:
 
 ```bash
-% heroku git:remote -a carrot-u-admin
+% heroku git:remote -a carrot-u-admin      # this tells git where your heroku app lives
 ```
 
 For setup this is all you need to do, but now you can push code to Heroku, run
@@ -91,7 +104,7 @@ Use this when developing code.
 You can launch the Heroku app using the Heroku command line:
 
 ```bash
-% heroku apps:open
+% heroku apps:open     # this will open the app URL in your default browser
 ```
 
 or you can just browse to https://carrot-u-admin.herokuapp.com/
