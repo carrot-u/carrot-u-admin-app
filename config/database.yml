@@ -1,10 +1,4 @@
 # PostgreSQL
-#   gem install pg
-#   createdb carrot_u_admin/carrot_u_admin_dev/carrot_u_admin_test
-#   psql <db_name>
-#   create role carrot_u_admin with createdb login password '<password>';
-#   export DATABASE_url=postgres://carrot_u_admin:<password>@localhost:5432/<db_name>
-#   rake db:migrate
 default: &default
   adapter: postgresql
   encoding: unicode
@@ -19,7 +13,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-
+  database: carrot_u_admin_test
 
 production:
   <<: *default
