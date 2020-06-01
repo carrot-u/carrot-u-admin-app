@@ -1,0 +1,24 @@
+<%= form_with(model: application_question, local: true) do |form| %>
+    <div class="field">
+      <%= form.label :text %>
+      <%= form.text_field :text %>
+    </div>
+
+    <div class="field">
+      <%= form.select(:role, [['Student', 'student'], ['Mentor', 'mentor']]) %>
+    </div>
+
+    <div class="field">
+      <%= form.label :current %><br />
+      <%= form.label :current, "Yes", :value => "true"  %>
+      <%= form.radio_button :current, true, checked: true %>
+      <%= form.label :current, "No", :value => "false"  %>
+      <%= form.radio_button :current, false %>
+    </div>
+
+    <div class="actions">
+    <%= form.submit %>
+  </div>
+  
+  <% end %>
+  
