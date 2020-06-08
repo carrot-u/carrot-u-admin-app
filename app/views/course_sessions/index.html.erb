@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>CarrotU Sessions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Session Name</th>
+      <th>Start Date</th>
+      <th>Lectures</th>
+      <th>Github Repository</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @course_sessions.each do |course_session| %>
+      <tr>
+        <td><%= course_session.name %></td>
+        <td><%= course_session.start_to_s %></td>
+        <td><%= course_session.lectures.count %></td>
+        <td><%= course_session.repository_link %></td>
+        <td><%= link_to 'Show', course_session %></td>
+        <td><%= link_to 'Edit', edit_course_session_path(course_session) %></td>
+        <td><%= link_to 'Destroy', course_session, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Course Session', new_course_session_path %>

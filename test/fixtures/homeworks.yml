@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  content: MyText
+  lecture: 
+  status: MyText
+  due_date: 2020-06-07
+
+two:
+  content: MyText
+  lecture: 
+  status: MyText
+  due_date: 2020-06-07

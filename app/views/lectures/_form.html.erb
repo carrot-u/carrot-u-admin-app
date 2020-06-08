@@ -1,0 +1,31 @@
+<%= form_with(model: lecture, local: true) do |form| %>
+
+  <div class="field">
+    <%= form.hidden_field :course_session_id, value: params[:format] %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lecture_name %>
+    <%= form.text_field :lecture_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lecture_content %>
+    <%= form.text_field :lecture_content %>
+  </div>
+
+  <div class="field">
+    <%= form.label :video_link %>
+    <%= form.text_field :video_link %>
+  </div>
+
+
+  <div class="field">
+    <%= form.label :teacher_id %>
+    <%= form.number_field :teacher_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
