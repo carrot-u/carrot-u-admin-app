@@ -4,12 +4,12 @@ one:
   lecture_name: MyString
   lecture_content: MyString
   video_link: MyString
-  homework: 
-  teacher: 
+  homework_id: 1
+  teacher_id:  1
 
 two:
   lecture_name: MyString
   lecture_content: MyString
   video_link: MyString
-  homework: 
-  teacher: 
+  homework_id: 2
+  teacher_id: 1

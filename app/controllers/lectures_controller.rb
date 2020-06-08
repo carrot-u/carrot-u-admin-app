@@ -56,9 +56,10 @@ class LecturesController < ApplicationController
   # DELETE /lectures/1
   # DELETE /lectures/1.json
   def destroy
+    course_session_id = @lecture.course_session_id
     @lecture.destroy
     respond_to do |format|
-      format.html { redirect_to lectures_url, notice: 'Lecture was successfully destroyed.' }
+      format.html { redirect_to course_session_path(course_session_id), notice: 'Lecture was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

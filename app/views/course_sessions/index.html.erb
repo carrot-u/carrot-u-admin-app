@@ -17,7 +17,7 @@
     <% @course_sessions.each do |course_session| %>
       <tr>
         <td><%= course_session.name %></td>
-        <td><%= course_session.start_date %></td>
+        <td><%= course_session.start_to_s %></td>
         <td><%= course_session.lectures.count %></td>
         <td><%= course_session.repository_link %></td>
         <td><%= link_to 'Show', course_session %></td>
