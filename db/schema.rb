@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_07_234120) do
+ActiveRecord::Schema.define(version: 2020_06_07_172921) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,33 @@ ActiveRecord::Schema.define(version: 2020_05_07_234120) do
     t.datetime "end_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "repository_link"
+    t.bigint "lectures_id"
+    t.index ["lectures_id"], name: "index_course_sessions_on_lectures_id"
+  end
+
+  create_table "homeworks", force: :cascade do |t|
+    t.text "content"
+    t.bigint "lecture_id"
+    t.text "status"
+    t.date "due_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["lecture_id"], name: "index_homeworks_on_lecture_id"
+  end
+
+  create_table "lectures", force: :cascade do |t|
+    t.string "lecture_name"
+    t.string "lecture_content"
+    t.string "video_link"
+    t.bigint "homework_id"
+    t.bigint "teacher_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "course_session_id"
+    t.index ["course_session_id"], name: "index_lectures_on_course_session_id"
+    t.index ["homework_id"], name: "index_lectures_on_homework_id"
+    t.index ["teacher_id"], name: "index_lectures_on_teacher_id"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -84,4 +111,6 @@ ActiveRecord::Schema.define(version: 2020_05_07_234120) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "course_sessions", "lectures", column: "lectures_id"
+  add_foreign_key "lectures", "course_sessions"
 end

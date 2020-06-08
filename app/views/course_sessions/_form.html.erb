@@ -1,0 +1,42 @@
+<%= form_with(model: course_session, local: true) do |form| %>
+  <% if course_session.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(course_session.errors.count, "error") %> prohibited this lecture from being saved:</h2>
+
+      <ul>
+        <% course_session.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :start_date %>
+    <%= form.date_field :start_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :end_date %>
+    <%= form.date_field :end_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :repository_link %>
+    <%= form.text_field :repository_link %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

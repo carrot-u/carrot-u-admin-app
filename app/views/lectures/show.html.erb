@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Lecture ID:</strong>
+  <%= @lecture.id %>
+</p>
+
+<p>
+  <strong>Lecture name:</strong>
+  <%= @lecture.lecture_name %>
+</p>
+
+<p>
+  <strong>Lecture content:</strong>
+  <%= @lecture.lecture_content %>
+</p>
+
+<p>
+  <strong>Video link:</strong>
+  <%= @lecture.video_link %>
+</p>
+
+<p>
+  <strong>CarrotU Session:</strong>
+  <%= @lecture.course_session_id %>
+</p>
+
+<p>
+  <strong>Teacher:</strong>
+  <%= @lecture.teacher_id %>
+</p>
+
+<%= link_to 'Edit', edit_lecture_path(@lecture) %> |
+<%= link_to 'Back', course_session_path(@lecture.course_session_id) %>
