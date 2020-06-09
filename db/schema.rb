@@ -80,6 +80,19 @@ ActiveRecord::Schema.define(version: 2020_06_07_172921) do
     t.index ["teacher_id"], name: "index_lectures_on_teacher_id"
   end
 
+  create_table "mentors", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "manager_name"
+    t.string "manager_email"
+    t.boolean "is_active"
+    t.boolean "is_approved"
+    t.text "skills"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.string "session_id", null: false
     t.text "data"

@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @mentor.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @mentor.last_name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @mentor.email %>
+</p>
+
+<p>
+  <strong>Manager name:</strong>
+  <%= @mentor.manager_name %>
+</p>
+
+<p>
+  <strong>Manager email:</strong>
+  <%= @mentor.manager_email %>
+</p>
+
+<p>
+  <strong>Is active:</strong>
+  <%= @mentor.is_active %>
+</p>
+
+<p>
+  <strong>Is approved:</strong>
+  <%= @mentor.is_approved %>
+</p>
+
+<p>
+  <strong>Skills:</strong>
+  <%= @mentor.skills %>
+</p>
+
+<%= link_to 'Edit', edit_mentor_path(@mentor) %> |
+<%= link_to 'Back', mentors_path %>

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   resources :lectures
   resources :course_sessions
+  resources :mentors
 
   get "/help/:page", to: "help#show"
 
@@ -16,4 +17,7 @@ Rails.application.routes.draw do
   post "/auth/:provider/callback", to: "sessions#create"
   get "/login", to: 'sessions#new'
   get "/dev_login/:email", to: 'sessions#dev' if Rails.env.development?
+
+  #signing up to be a mentor
+  
 end
