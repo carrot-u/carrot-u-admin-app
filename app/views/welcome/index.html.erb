@@ -1,16 +1,59 @@
-<span>
-  <p>
-  <%= @quote %>
-  </p>
-  <p>
-    <%= link_to "Sign in", login_url, class: "btn btn-primary btn-lg", role: "button", id: "sign_in" %>
-  </p>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="generator" content="Jekyll v4.0.1">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <!-- <link href="cover.css" rel="stylesheet"> -->
+  </head>
+  <body class="text-center">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+      <header class="masthead mb-auto">
+        <div class="inner">
+          <h3 class="masthead-brand">CarrotU</h3>
+          <nav class="nav nav-masthead justify-content-center">
+            <a class="nav-link active" href="#">Home</a>
+            <%= link_to "Course Sessions", course_sessions_path, class: "nav-link active", role: "article", id: "sessions" %>
+            <a class="nav-link" href="#">Apply</a>
+            <a class="nav-link" href="#">Mentor</a>
+          </nav>
+        </div>
+      </header>
+    <span><p><%= @quote %></p></span>
+  <main role="main" class="inner cover">
+    <%= image_tag ("logo.png")%>
+    <p class="lead">Instacart's In-House Coding Bootcamp</p>
+    <p class="lead">
+      <%= link_to "Sign in", login_url, class: "btn btn-lg btn-secondary", role: "button", id: "sign_in" %>
+    </p>
+  </main>
+
+  <footer class="mastfoot mt-auto">
+  </footer>
+</div>
+</body>
+</html>
 
 
   <p>
   Logged in as: <%= current_user&.email %>
-  </p>
-
-  <p>
-    <%= link_to "View My Course Sessions", course_sessions_path  %>
   </p>
