@@ -2,10 +2,27 @@
   <p>
   <%= @quote %>
   </p>
+
+<head>
+<style>
+h1 {text-align: center;}
+p {text-align: left;}
+div {text-align: center;}
+</style>
+</head>
+
+<header> <h1> Welcome to Carrot U </h1></header>
   <p>
+  Logged in as: <%= current_user&.email %>
+  </p>
+
+  <p> 
     <%= link_to "Sign in", login_url, class: "btn btn-primary btn-lg", role: "button", id: "sign_in" %>
   </p>
 
+  <h1> 
+    <%= link_to "Sign up to be a mentor", controller: "mentors", action: "new" %>
+  </h1>
 
   <p>
   Logged in as: <%= current_user&.email %>
@@ -14,3 +31,6 @@
   <p>
     <%= link_to "View My Course Sessions", course_sessions_path  %>
   </p>
+  <h1> 
+  <%= link_to "Sign up to be a student"%>
+</h1>
