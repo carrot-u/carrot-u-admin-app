@@ -40,5 +40,3 @@ yarn-debug.log*
 
 # Ignore IntelliJ
 .idea
-
-.DS_Store
