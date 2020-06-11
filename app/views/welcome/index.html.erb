@@ -1,11 +1,11 @@
-<div class="cover-container text-center">
+<div class="home-container text-center">
   <header class="masthead mb-auto py-3">
-    <div class="inner">
+    <div>
       <h3 class="masthead-brand">CarrotU</h3>
       <% if logged_in? %>
       <nav class="nav nav-masthead justify-content-center">
         <a class="nav-link active" href="#">Home</a>
-        <%= link_to "Course Sessions", course_sessions_path, class: "nav-link active", role: "article", id: "sessions" %>
+        <%= link_to "Course Sessions", course_sessions_path, class: "nav-link", role: "article", id: "sessions" %>
         <a class="nav-link" href="#">Apply</a>
         <a class="nav-link" href="#">Mentor</a>
       </nav>
@@ -15,7 +15,7 @@
     </div>
   </header>
   <span><p><%= @quote %></p></span>
-  <main role="main" class="inner cover">
+  <main role="main" class="content">
     <%= image_tag ("logo.png")%>
     <p class="lead">Instacart's In-House Coding Bootcamp</p>
     <p class="lead">

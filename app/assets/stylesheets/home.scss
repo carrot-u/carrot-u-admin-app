@@ -2,16 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-
-a {
-	color: #fff;
-	&:focus {
-		color: #fff;
-	}
-	&:hover {
-		color: #fff;
-	}
-}
+// button formatting for secondary colors
 .btn-secondary {
 	color: #333;
 	text-shadow: none;
@@ -30,15 +21,14 @@ a {
 		border: .05rem solid #fff;
 	}
 }
-.cover-container {
+.home-container {
 	max-width: 42em;
 }
+// CarrotU text above nav
 .masthead {
 	margin-bottom: 2rem;
 }
-.masthead-brand {
-	margin-bottom: 0;
-}
+// nav for homepage/app
 .nav-masthead {
 	.nav-link {
 		padding: .25rem 0;
@@ -52,33 +42,23 @@ a {
 		&:focus {
 			border-bottom-color: rgba(255, 255, 255, .25);
 		}
-		+ {
-			.nav-link {
-				margin-left: 1rem;
-			}
-		}
 	}
 	.active {
 		color: #fff;
 		border-bottom-color: #fff;
 	}
 }
-.cover {
+// main div rendering content
+.content {
 	padding: 0 1.5rem;
 	.btn-lg {
 		padding: .75rem 1.25rem;
 		font-weight: 700;
+		background-color: : black;
 	}
 }
+// homepage footer
 .mastfoot {
-	color: rgba(255, 255, 255, .5);
   margin-top: auto;
-}
-@media (min-width: 48em) {
-	.masthead-brand {
-		float: left;
-	}
-	.nav-masthead {
-		float: right;
-	}
+	padding-left: 1rem;
 }
