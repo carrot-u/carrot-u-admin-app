@@ -1,11 +1,13 @@
 class HomeworksController < ApplicationController
   before_action :set_homework, only: [:show, :edit, :update, :destroy]
   before_action :set_lecture, only: [:new, :create]
+  respond_to :html, :json
 
   # GET /homeworks
   # GET /homeworks.json
   def index
     @homeworks = Homework.all
+    respond_with(@homeworks)
   end
 
   # GET /homeworks/1
@@ -27,30 +29,14 @@ class HomeworksController < ApplicationController
   def create
     #@lecture = Lecture.find(params[:format])
     @homework = @lectures.homework.build(homework_params)
-
-    respond_to do |format|
-      if @homework.save
-        format.html { redirect_to @homework, notice: 'Homework was successfully created.' }
-        format.json { render :show, status: :created, location: @homework }
-      else
-        format.html { render :new }
-        format.json { render json: @homework.errors, status: :unprocessable_entity }
-      end
-    end
+    flash[:notice] = "Homework was successfully created." if @homework.save
+    respond_with(@homework)
   end
 
   # PATCH/PUT /homeworks/1
   # PATCH/PUT /homeworks/1.json
   def update
-    respond_to do |format|
-      if @homework.update(homework_params)
-        format.html { redirect_to @homework, notice: 'Homework was successfully updated.' }
-        format.json { render :show, status: :ok, location: @homework }
-      else
-        format.html { render :edit }
-        format.json { render json: @homework.errors, status: :unprocessable_entity }
-      end
-    end
+    respond_with(@homework)
   end
 
   # DELETE /homeworks/1
@@ -75,7 +61,7 @@ class HomeworksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def homework_params
-      params.fetch(:homework, {})
-      # params.require(:homework).permit(:content, :status, :due_date)
+      #params.fetch(:homework, {})
+      params.require(:homework).permit(:content, :status, :due_date)
     end
 end
