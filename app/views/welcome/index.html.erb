@@ -1,13 +1,17 @@
-<div class="cover-container text-center p3">
-  <header class="masthead mb-auto">
+<div class="cover-container text-center">
+  <header class="masthead mb-auto py-3">
     <div class="inner">
       <h3 class="masthead-brand">CarrotU</h3>
+      <% if logged_in? %>
       <nav class="nav nav-masthead justify-content-center">
         <a class="nav-link active" href="#">Home</a>
         <%= link_to "Course Sessions", course_sessions_path, class: "nav-link active", role: "article", id: "sessions" %>
         <a class="nav-link" href="#">Apply</a>
         <a class="nav-link" href="#">Mentor</a>
       </nav>
+      <% else %>
+        <p>test</p>
+      <% end %>
     </div>
   </header>
   <span><p><%= @quote %></p></span>
@@ -15,7 +19,7 @@
     <%= image_tag ("logo.png")%>
     <p class="lead">Instacart's In-House Coding Bootcamp</p>
     <p class="lead">
-      <%= link_to "Sign in", login_url, class: "btn btn-lg btn-secondary", role: "button", id: "sign_in" %>
+      <%= link_to "Sign in", login_url, class: "btn btn-lg btn-secondary", role: "button", id: "sign_in" if !logged_in? %>
     </p>
   </main>
 </div>
