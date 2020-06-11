@@ -1,2 +1,12 @@
 
 @import "bootstrap";
+
+html {
+	height: 100%;
+}
+body {
+	height: 100%;
+	color: #000;
+	text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
+  min-height: 100%;
+}
