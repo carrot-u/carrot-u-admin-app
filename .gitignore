@@ -40,3 +40,6 @@ yarn-debug.log*
 
 # Ignore IntelliJ
 .idea
+
+# Ignore MacOS .DS_Store
+.DS_Store
