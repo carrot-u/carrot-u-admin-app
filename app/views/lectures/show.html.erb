@@ -30,5 +30,14 @@
   <%= @lecture.teacher_id %>
 </p>
 
+<p>
+  <strong>Homework:</strong>
+  <% if (@lecture.homework_id != nil) %>
+    <%= @lecture.homework.content %>
+  <% else %>
+    <%= link_to 'Add Homework', new_homework_path(@lecture.id) %>
+  <% end %>
+</p>
+
 <%= link_to 'Edit', edit_lecture_path(@lecture) %> |
 <%= link_to 'Back', course_session_path(@lecture.course_session_id) %>
