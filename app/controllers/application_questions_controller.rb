@@ -23,33 +23,13 @@ class ApplicationQuestionsController < ApplicationController
 
   # POST /application_questions
   def create
-    params[:application_question][:created_at] = Time.now
-    params[:application_question][:updated_at] = Time.now
     @application_question = ApplicationQuestion.new(application_question_params)
-
-    respond_to do |format|
-      if @application_question.save
-        format.html { redirect_to @application_question, notice: 'Application Question was successfully created.' }
-        format.json { render :show, status: :created, location: @application_question }
-      else
-        format.html { render :edit }
-        format.json { render json: @application_question.errors, status: :unprocessable_entity }
-      end
-    end
+    create_or_update_application_question('create')
   end
 
   # PATCH/PUT /application_questions/1
   def update
-    params[:application_question][:updated_at] = Time.now
-    respond_to do |format|
-      if @application_question.update(application_question_params)
-        format.html { redirect_to @application_question, notice: 'Application Question was successfully updated.' }
-        format.json { render :show, status: :ok, location: @application_question }
-      else
-        format.html { render :edit }
-        format.json { render json: @application_question.errors, status: :unprocessable_entity }
-      end
-    end
+    create_or_update_application_question('update')
   end
 
   # DELETE /application_questions/1
@@ -69,6 +49,30 @@ class ApplicationQuestionsController < ApplicationController
 
   def application_question_params
       params.require(:application_question).permit(:text, :created_at, :updated_at, :role, :current)
+  end
+
+  def create_or_update_application_question(action)
+    result = nil
+    notice = nil
+    status = nil
+    respond_to do |format|
+      if action == 'create'
+        result = @application_question.save
+        notice = 'Application Question was successfully created.'
+        status = :created
+      elsif action == 'update'
+        result = @application_question.update(application_question_params)
+        notice = 'Application Question was successfully updated.'
+        status = :ok
+      end
+      if result
+        format.html { redirect_to @application_question, notice: notice}
+        format.json { render :show, status: status, location: @application_question }
+      else
+        format.html { render :edit }
+        format.json { render json: @application_question.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
 end
