@@ -55,7 +55,11 @@
         <td><%= lecture.lecture_name %></td>
         <td><%= lecture.lecture_content %></td>
         <td><%= lecture.video_link %></td>
-        <td><%= lecture.homework_id %></td>
+        <% if lecture.has_homework? %>
+          <td><%= link_to lecture.homework.content, homework_path(lecture.homework) %></td>
+        <% else %>
+          <td><%= link_to 'Add Homework', new_homework_path(lecture.id) %></td>
+        <% end %>
         <td><%= lecture.teacher_id %></td>
         <td><%= lecture.course_session_id %></td>
         <td><%= link_to 'Show', lecture %></td>

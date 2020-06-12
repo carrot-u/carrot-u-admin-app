@@ -1,6 +1,6 @@
 class HomeworksController < ApplicationController
   before_action :set_homework, only: [:show, :edit, :update, :destroy]
-  before_action :set_lecture, only: [:new, :create]
+  before_action :set_lecture, only: [:new]
   respond_to :html, :json
 
   # GET /homeworks
@@ -27,8 +27,8 @@ class HomeworksController < ApplicationController
   # POST /homeworks
   # POST /homeworks.json
   def create
-    #@lecture = Lecture.find(params[:format])
-    @homework = @lectures.homework.build(homework_params)
+    @lecture = Lecture.find(params[:homework][:lecture_id])
+    @homework = @lecture.build_homework(homework_params)
     flash[:notice] = "Homework was successfully created." if @homework.save
     respond_with(@homework)
   end
@@ -36,6 +36,7 @@ class HomeworksController < ApplicationController
   # PATCH/PUT /homeworks/1
   # PATCH/PUT /homeworks/1.json
   def update
+    @homework = Homework.update(@homework.id, homework_params)
     respond_with(@homework)
   end
 
@@ -61,7 +62,7 @@ class HomeworksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def homework_params
-      #params.fetch(:homework, {})
       params.require(:homework).permit(:content, :status, :due_date)
     end
+
 end
