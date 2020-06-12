@@ -10,7 +10,10 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="d-flex flex-column h-100">
     <%= yield %>
+    <footer class="mastfoot mt-auto">
+      Logged in as: <%= current_user&.email %>
+    </footer>
   </body>
 </html>

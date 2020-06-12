@@ -41,5 +41,6 @@ yarn-debug.log*
 # Ignore IntelliJ
 .idea
 
+
 #Ignore .DS_Store
 .DS_Store
