@@ -1,4 +1,23 @@
 <p id="notice"><%= notice %></p>
+<p>
+    <strong>Homework ID:</strong>
+    <%= @homework.id %>
+</p>
+
+<p>
+    <strong>Content:</strong>
+    <%= @homework.content %>
+</p>
+
+<p>
+    <strong>Status:</strong>
+    <%= @homework.status %>
+</p>
+
+<p>
+    <strong>Due Date:</strong>
+    <%= @homework.due_date.to_s %>
+</p>
 
 <%= link_to 'Edit', edit_homework_path(@homework) %> |
-<%= link_to 'Back', lecture_path(@homework.lecture_id) %>
+<%= link_to 'Back', course_session_path(@homework.get_course_session_id) %>

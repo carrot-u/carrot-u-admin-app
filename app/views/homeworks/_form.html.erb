@@ -12,12 +12,12 @@
   <% end %>
   
   <div class="field">
-    <%= form.label :lecture_id, value: params[:format] %>
+    <%= form.hidden_field :lecture_id, value: params[:format] %>
   </div>
   
   <div class="field">
     <%= form.label :content %>
-    <%= form.text_field :homework_content %>
+    <%= form.text_field :content %>
   </div>
 
   <div class="field">
