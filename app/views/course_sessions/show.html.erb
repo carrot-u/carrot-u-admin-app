@@ -31,43 +31,29 @@
 
 <br></br>
 
-<p>
-  <strong>Lectures</strong>
-</p>
-<table>
-  <thead>
-    <tr>
-      <th>Lecture ID</th>
-      <th>Lecture name</th>
-      <th>Lecture content</th>
-      <th>Video link</th>
-      <th>Homework</th>
-      <th>Teacher</th>
-      <th>CarrotU Session</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+  <div class="container mx-auto">
     <% @course_session.lectures.each do |lecture| %>
-      <tr>
-        <td><%= lecture.id %></td>
-        <td><%= lecture.lecture_name %></td>
-        <td><%= lecture.lecture_content %></td>
-        <td><%= lecture.video_link %></td>
-        <% if lecture.has_homework? %>
-          <td><%= link_to lecture.homework.content, homework_path(lecture.homework) %></td>
-        <% else %>
-          <td><%= link_to 'Add Homework', new_homework_path(lecture.id) %></td>
-        <% end %>
-        <td><%= lecture.teacher_id %></td>
-        <td><%= lecture.course_session_id %></td>
-        <td><%= link_to 'Show', lecture %></td>
-        <td><%= link_to 'Edit', edit_lecture_path(lecture) %></td>
-        <td><%= link_to 'Destroy', lecture, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <div class="card bg-white mb-3" style="max-width: 100rem;">
+        <div class="card-header">
+          <%= lecture.lecture_name %>
+          <%= link_to fa_icon("trash"), lecture, class: "float-right px-3", method: :delete, data: { confirm: 'Are you sure?' }  %>
+          <%= link_to fa_icon("edit"), edit_lecture_path(lecture), class: "float-right" %>
+        </div>
+        <div class="card-title p-3">
+          <h5><%= lecture.lecture_content %></h5>
+        </div>
+        <div class = "card-body px-3 py-0">
+          <p>Lecture video: <%= link_to "View", lecture.video_link %></p>
+          <% if lecture.has_homework? %>
+            <%= link_to lecture.homework.content, homework_path(lecture.homework) %>
+          <% else %>
+            <%= link_to 'Add Homework', new_homework_path(lecture.id) %>
+          <% end %>
+        </div>
+      </div>
     <% end %>
-  </tbody>
-</table>
 
-<%= link_to 'Add Lecture', new_lecture_path(@course_session.id) %>
+      <div class = "card px-3 py-3 mb-3">
+        <%= link_to '+ Add Lecture', new_lecture_path(@course_session.id) %>
+      </div>
+  </div>
