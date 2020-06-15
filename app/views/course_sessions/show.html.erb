@@ -17,12 +17,12 @@
         <div class="card-title p-3">
           <h5><%= lecture.lecture_content %></h5>
         </div>
-        <div class = "card-body px-3 py-0">
-          <p>Lecture video: <%= link_to "View", lecture.video_link %></p>
+        <div class = "card-body px-3 py-1">
+          <%= link_to "View Lecture", lecture.video_link, class: "float-left" if lecture.video_link != '' %>
           <% if lecture.has_homework? %>
-            <%= link_to lecture.homework.content, homework_path(lecture.homework) %>
+            <%= link_to lecture.homework.content, homework_path(lecture.homework), class: "float-right" %>
           <% else %>
-            <%= link_to 'Add Homework', new_homework_path(lecture.id) %>
+            <%= link_to 'Add Homework', new_homework_path(lecture.id), class: "float-right" %>
           <% end %>
         </div>
       </div>
