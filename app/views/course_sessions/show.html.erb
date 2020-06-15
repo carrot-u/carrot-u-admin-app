@@ -1,36 +1,11 @@
-<p id="notice"><%= notice %></p>
-<div class="" style="border:1px solid black;">
-  <p>
-    <strong>Session Name:</strong>
-    <%= @course_session.name %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= @course_session.description %>
-  </p>
-
-  <p>
-    <strong>Start Date:</strong>
-    <%= @course_session.start_date %>
-  </p>
-
-  <p>
-    <strong>End Date:</strong>
-    <%= @course_session.end_date %>
-  </p>
-
-  <p>
-    <strong>Github Repository:</strong>
-    <%= @course_session.repository_link %>
-  </p>
-
-  <%= link_to 'Edit', edit_course_session_path(@course_session) %> |
-  <%= link_to 'Back', course_sessions_path %>
+<div class="container mb-auto py-3 text-center">
+    <h1><%= @course_session.name %></h1>
+    <h3><%= @course_session.description %></h3>
+    <%= link_to fa_icon("github"), @course_session.repository_link %> |
+    <%= link_to 'Edit', edit_course_session_path(@course_session) %> |
+    <%= link_to 'Back', course_sessions_path %>
 </div>
-
-<br></br>
-
+<p id="notice"><%= notice %></p>
   <div class="container mx-auto">
     <% @course_session.lectures.each do |lecture| %>
       <div class="card bg-white mb-3" style="max-width: 100rem;">
