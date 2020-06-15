@@ -1,6 +1,7 @@
 
 
  @import "bootstrap";
+ @import "font-awesome";
 
  html {
  	height: 100%;
@@ -9,4 +10,10 @@
  	height: 100%;
  	color: #000;
    min-height: 100%;
+ }
+ // homepage footer
+ .mastfoot {
+   margin-top: auto;
+ 	padding-left: 1rem;
+  box-shadow: 0px 0 10px rgba(0, 0, 0, 0.8);
  }
