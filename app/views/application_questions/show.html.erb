@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+<% if @application_question %>       
+
+  <p>
+    <strong>ID:</strong>
+    <%= @application_question.id %>
+  </p>
+
+  <p>
+    <strong>Text:</strong>
+    <%= @application_question.text %>
+  </p>
+
+  <p>
+    <strong>Role:</strong>
+    <%= @application_question.role %>
+  </p>
+
+  <p>
+    <strong>Current:</strong>
+    <%= @application_question.current %>
+  </p>
+
+  <p>
+    <strong>Created At:</strong>
+    <%= @application_question.created_at %>
+  </p>
+
+  <p>
+    <strong>Updated At:</strong>
+    <%= @application_question.updated_at %>
+  </p>
+
+<% end %>
+<%= link_to 'Back', application_questions_path %>

@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
+  resources :application_questions
+
   # okta saml authenticates by posting to the callback url
   get 'sessions/create'
   get 'sessions/destroy'
