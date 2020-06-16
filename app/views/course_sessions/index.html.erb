@@ -16,6 +16,7 @@
       </div>
       <div class = "card-body px-3 py-1">
         <%= link_to fa_icon("github") + " View Github Repository", course_session.repository_link, class: "float-left" if course_session.repository_link != '' %>
+        <%= link_to "View Session Details", course_session_path(course_session), class: "float-right" %>
       </div>
     </div>
   <% end %>
