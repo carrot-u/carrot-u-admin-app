@@ -11,7 +11,24 @@
   </head>
 
   <body class="d-flex flex-column h-100">
-    <%= yield %>
+    <div class="home-container text-center">
+      <header class="masthead mb-auto py-3">
+        <div>
+          <h3 class="masthead-brand">CarrotU</h3>
+          <% if logged_in? %>
+          <nav class="nav nav-masthead justify-content-center">
+            <%= link_to "Home", root_path,  class: "nav-link", role: "article", id: "home" %>
+            <%= link_to "Course Sessions", course_sessions_path, class: "nav-link", role: "article", id: "sessions" %>
+            <a class="nav-link" href="#">Apply</a>
+            <%= link_to "Sign up to be a mentor",new_mentor_path, class: "nav-link", role: "article", id: "mentors"  %>
+          </nav>
+          <% else %>
+            <p>test</p>
+          <% end %>
+        </div>
+      </header>
+      <%= yield %>
+    </div>
     <footer class="mastfoot mt-auto">
       Logged in as: <%= current_user&.email %>
     </footer>
