@@ -27,7 +27,7 @@
 
   <div class="field">
     <%= form.label :due_date %>
-    <%= form.date_field :due_date %>
+    <%= form.date_select :dute_date, :order => [:month, :day, :year] %>
   </div>
 
   <div class="actions">

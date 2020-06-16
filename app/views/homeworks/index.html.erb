@@ -1,14 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Homework Assignments</h1>
+<h1>Homework Assignements</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Homework ID</th>
-      <th>Homework Content</th>
-      <th>Status</th>
-      <th>Due Date</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,10 +12,6 @@
   <tbody>
     <% @homeworks.each do |homework| %>
       <tr>
-        <td><%= homework.id %></td>
-        <td><%= homework.content %></td>
-        <td><%= homework.status %></td>
-        <td><%= homework.due_date.to_s %></td>
         <td><%= link_to 'Show', homework %></td>
         <td><%= link_to 'Edit', edit_homework_path(homework) %></td>
         <td><%= link_to 'Destroy', homework, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -30,4 +22,4 @@
 
 <br>
 
-<%= link_to 'Back', course_sessions_path %>
+<%= link_to 'New Homework', new_homework_path %>
