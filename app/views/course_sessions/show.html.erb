@@ -5,8 +5,9 @@
     <%= link_to 'Edit', edit_course_session_path(@course_session) %> |
     <%= link_to 'Back', course_sessions_path %>
 </div>
-<p id="notice"><%= notice %></p>
+
 <div class="container mx-auto">
+  <p id="notice"><%= notice %></p>
   <% @course_session.lectures.each do |lecture| %>
     <div class="card bg-white mb-3" style="max-width: 100rem;">
       <div class="card-header">

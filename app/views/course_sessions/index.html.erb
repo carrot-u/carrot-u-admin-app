@@ -1,33 +1,27 @@
-<p id="notice"><%= notice %></p>
+<div class="container mb-auto py-3 text-center">
+  <h1>CarrotU Sessions</h1>
+</div>
 
-<h1>CarrotU Sessions</h1>
+<div class="container mx-auto">
+  <p id="notice"><%= notice %></p>
+  <% @course_sessions.each do |course_session| %>
+    <div class="card bg-white mb-3" style="max-width: 100rem;">
+      <div class="card-header">
+        <%= course_session.name %>
+        <%= link_to fa_icon("trash"), course_session, class: "float-right px-3", method: :delete, data: { confirm: 'Are you sure?' }  %>
+        <%= link_to fa_icon("edit"), edit_course_session_path(course_session), class: "float-right" %>
+      </div>
+      <div class="card-title p-3">
+        <h5><%= "Starts " + course_session.start_to_s %></h5>
+      </div>
+      <div class = "card-body px-3 py-1">
+        <%= link_to fa_icon("github") + " View Github Repository", course_session.repository_link, class: "float-left" if course_session.repository_link != '' %>
+        <%= link_to "View Session Details", course_session_path(course_session), class: "float-right" %>
+      </div>
+    </div>
+  <% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Session Name</th>
-      <th>Start Date</th>
-      <th>Lectures</th>
-      <th>Github Repository</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @course_sessions.each do |course_session| %>
-      <tr>
-        <td><%= course_session.name %></td>
-        <td><%= course_session.start_to_s %></td>
-        <td><%= course_session.lectures.count %></td>
-        <td><%= course_session.repository_link %></td>
-        <td><%= link_to 'Show', course_session %></td>
-        <td><%= link_to 'Edit', edit_course_session_path(course_session) %></td>
-        <td><%= link_to 'Destroy', course_session, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Course Session', new_course_session_path %>
+    <div class = "card px-3 py-3 mb-3">
+      <%= link_to '+ Add Course Session', new_course_session_path %>
+    </div>
+</div>

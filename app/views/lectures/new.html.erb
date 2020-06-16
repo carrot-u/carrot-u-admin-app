@@ -1,5 +1,6 @@
 <h1>New Lecture</h1>
-
-<%= render 'form', url: lectures_path, lecture: @lecture %>
+<div class="container d-flex justify-content-center">
+  <%= render 'form', url: lectures_path, lecture: @lecture %>
+</div>
 
 <%= link_to 'Back', course_session_path(@lecture.course_session_id) %>
