@@ -16,7 +16,7 @@
 
 <p>
     <strong>Due Date:</strong>
-    <%= @homework.due_date_to_s %>
+    <%= @homework.due_date.to_s %>
 </p>
 
 <%= link_to 'Edit', edit_homework_path(@homework) %> |

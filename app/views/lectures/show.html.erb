@@ -32,7 +32,7 @@
 
 <p>
   <strong>Homework:</strong>
-  <% if @lecture.has_homework? %>
+  <% if (@lecture.homework_id != nil) %>
     <%= @lecture.homework.content %>
   <% else %>
     <%= link_to 'Add Homework', new_homework_path(@lecture.id) %>
