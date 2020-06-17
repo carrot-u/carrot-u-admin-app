@@ -1,6 +1,7 @@
 class HomeworksController < ApplicationController
   before_action :set_homework, only: [:show, :edit, :update, :destroy]
   before_action :set_lecture, only: [:new]
+  respond_to :html, :json
 
   # GET /homeworks
   # GET /homeworks.json
@@ -43,10 +44,7 @@ class HomeworksController < ApplicationController
   # DELETE /homeworks/1.json
   def destroy
     @homework.destroy
-    respond_to do |format|
-      format.html { redirect_to lecture_path(lecture_id), notice: 'Homework was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    respond_with(@homework)
   end
 
   private

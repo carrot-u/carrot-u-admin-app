@@ -2,4 +2,4 @@
 
 <%= render 'form', homework: @homework %>
 
-<%= link_to 'Back', lectures_path %>
+<%= link_to 'Back', course_session_path(@homework.get_course_session_id) %>

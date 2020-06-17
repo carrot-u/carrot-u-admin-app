@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   resources :lectures
   resources :course_sessions
-  resources :homeworks, except: [:destroy]
+  resources :homeworks
   resources :mentors
 
   get "/help/:page", to: "help#show"

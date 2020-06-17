@@ -38,6 +38,9 @@ gem 'jquery-rails'
 # Font Awesome for icons
 gem 'font-awesome-rails'
 
+# Responders gem for respond_to
+gem 'responders'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -53,7 +56,6 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'better_errors', '~> 2.1', '>= 2.1.1'
-  gem 'responders'
 end
 
 group :test do
