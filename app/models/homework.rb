@@ -1,5 +1,6 @@
 class Homework < ApplicationRecord
   belongs_to :lecture
+  has_many :homework_submissions
 
   def get_course_session_id
     @lecture = Lecture.find(self.lecture_id)

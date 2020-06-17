@@ -19,5 +19,6 @@
     <%= @homework.due_date_to_s %>
 </p>
 
+<%= link_to 'Submit Homework', new_homework_submission_path(@homework.id) %>
 <%= link_to 'Edit', edit_homework_path(@homework) %> |
 <%= link_to 'Back', course_session_path(@homework.get_course_session_id) %>

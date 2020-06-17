@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Course session user:</strong>
+  <%= @homework_submission.course_session_user_id %>
+</p>
+
+<p>
+  <strong>Homework:</strong>
+  <%= @homework_submission.homework_id %>
+</p>
+
+<p>
+  <strong>Pull request:</strong>
+  <%= @homework_submission.pull_request %>
+</p>
+
+<p>
+  <strong>Is public:</strong>
+  <%= @homework_submission.is_public %>
+</p>
+
+<%= link_to 'Edit', edit_homework_submission_path(@homework_submission) %> |
+<%= link_to 'Back', homework_submissions_path %>

@@ -1,0 +1,2 @@
+module HomeworkSubmissionsHelper
+end
