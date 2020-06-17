@@ -30,6 +30,7 @@
       <%= yield %>
     </div>
     <footer class="mastfoot mt-auto">
+      <%= image_tag current_user&.gravatar_url, class: "rounded-circle", style: "width: 25px; height: 25px;" %>
       Logged in as: <%= current_user&.email %>
     </footer>
   </body>
