@@ -75,7 +75,7 @@ class HomeworkSubmissionsController < ApplicationController
     end
 
     def set_course_session_user
-      @course_session_user = User.find_by_id(params[:id])
+      @hcourse_session_user = User.find_by_id(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

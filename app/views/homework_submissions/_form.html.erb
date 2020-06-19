@@ -15,6 +15,16 @@
   </div>
 
   <div class="field">
+    <%= form.label :homework_id %>
+    <%= @homework_submission.homework_id %>
+  </div>
+
+  <div class = "field">
+    <%= form.label :course_session_user_id %>
+    <%= @homework_submission.course_session_user_id %>
+  </div>
+
+  <div class="field">
     <%= form.label :pull_request %>
     <%= form.text_field :pull_request %>
   </div>
