@@ -1,0 +1,5 @@
+<div class="container mb-auto py-3 text-center">
+    <h1><%= current_user.email %></h1>
+    <h1><%= "Admin?: "+ current_user.admin.to_s %></h1>
+    <%= link_to 'Back', root_path %>
+</div>
