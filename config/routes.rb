@@ -20,7 +20,9 @@ Rails.application.routes.draw do
   post "/auth/:provider/callback", to: "sessions#create"
   get "/login", to: 'sessions#new'
   get "/dev_login/:email", to: 'sessions#dev' if Rails.env.development?
+  get "user/show", to: 'users#show'
+  get "users/", to: 'users#index'
 
   #signing up to be a mentor
-  
+
 end
