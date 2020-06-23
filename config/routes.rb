@@ -4,14 +4,14 @@ Rails.application.routes.draw do
   resources :course_sessions
   resources :homeworks
   resources :mentors
+  resources :application_questions
+  resources :admins
 
   get "/help/:page", to: "help#show"
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   root 'welcome#index'
-
-  resources :application_questions
 
   # okta saml authenticates by posting to the callback url
   get 'sessions/create'
