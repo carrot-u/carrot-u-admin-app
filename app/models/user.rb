@@ -10,6 +10,6 @@ class User < ApplicationRecord
   end
 
   def created_date_local
-    self.created_at.localtime.to_s
+    self.created_at.localtime.to_s.strftime('%m-%d-%y')
   end
 end
