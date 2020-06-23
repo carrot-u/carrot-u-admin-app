@@ -11,7 +11,7 @@
 
 <div class="container mx-auto">
   <p id="notice"><%= notice %></p>
-  <% @course_session.lectures.each do |lecture| %>
+  <% @course_session.lectures.sort_by{|e| [e[:schedule_date] ? 0 : 1,e[:schedule_date]]}.each do |lecture| %>
     <div class="card bg-white mb-3" style="max-width: 100rem;">
       <div class="card-header">
         <%= lecture.lecture_name %>
@@ -23,7 +23,8 @@
       <div class="card-title p-3">
         <h5><%= lecture.lecture_content %></h5>
       </div>
-      <div class = "card-body px-3 py-1">
+      <div class="card-body px-3 py-1">
+        <p class="text-left"><%= "Lecture Date: " + lecture.schedule_date.to_s if lecture.schedule_date %></p>
         <%= link_to "View Lecture", lecture.video_link, class: "float-left" if lecture.video_link != '' %>
         <% if lecture.has_homework? %>
           <%= link_to lecture.homework.content, homework_path(lecture.homework), class: "float-right" %>
