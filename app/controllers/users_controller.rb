@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   def show
   end
-
+  
   def make_admin
     @user = User.find(params[:id])
     @user.update_column(:admin,true)
