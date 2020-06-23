@@ -1,5 +1,22 @@
 <span><p><%= @quote %></p></span>
 <main role="main" class="content">
+
+  <% if @is_admin_approved%>
+  <div class="alert alert-warning" role="alert">
+  Thank you for signing up! You are now a mentor!
+  </div>
+
+  <% elsif @is_manager_approved%>
+  <div class="alert alert-warning" role="alert">
+  Thank you for signing up! Pending admin approval.
+  </div>
+
+  <% elsif @is_mentor %>
+  <div class="alert alert-warning" role="alert">
+  Thank you for signing up! Pending manager approval.
+  </div>
+  <% end %>
+
   <%= image_tag ("logo.png")%>
   <p class="lead">Instacart's In-House Coding Bootcamp</p>
   <p class="lead">
@@ -7,6 +24,5 @@
   </p>
 
   <div class="container d-flex">
-
   </div>
 </main>
