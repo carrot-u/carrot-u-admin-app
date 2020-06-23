@@ -8,4 +8,8 @@ class User < ApplicationRecord
     @md5 = Digest::MD5.hexdigest self.email.downcase
     "https://www.gravatar.com/avatar/" + @md5 + "?d=mp"
   end
+
+  def created_date_local
+    self.created_at.localtime.strftime('%m-%d-%y')
+  end
 end
