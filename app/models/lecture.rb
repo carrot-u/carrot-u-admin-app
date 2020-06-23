@@ -3,6 +3,11 @@ class Lecture < ApplicationRecord
   before_destroy :destroy_homeworks
   has_one :homework
 
+  # better presentation of lecture datetime in user local time
+  def scheduled_for_local
+    self.schedule_date.localtime.strftime("%Y/%m/%d at %I:%M%p")
+  end
+
   def has_homework?
     !self.homework.nil?
   end
@@ -12,5 +17,5 @@ class Lecture < ApplicationRecord
       self.homework.destroy
     end
   end
-  
+
 end
