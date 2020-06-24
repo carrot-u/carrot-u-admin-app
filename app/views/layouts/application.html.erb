@@ -22,17 +22,20 @@
             <a class="nav-link" href="#">Become a Student</a>
             <%= link_to "Sign up to be a mentor",new_mentor_path, class: "nav-link", role: "article", id: "mentors"  %>
             <%= link_to "Admins", admins_path, class: "nav-link", role: "article", id: "admins" %>
+
           </nav>
           <% else %>
-            <p>test</p>
+            <%= link_to "Sign in", login_url, class: "btn btn-lg btn-primary", role: "button", id: "sign_in" if !logged_in? %>
           <% end %>
         </div>
       </header>
       <%= yield %>
     </div>
     <footer class="mastfoot mt-auto">
-      <%= image_tag current_user&.gravatar_url, class: "rounded-circle", style: "width: 25px; height: 25px;" %>
-      <%= link_to "Logged in as: " + current_user&.email, user_show_path(current_user) %>
+      <%= image_tag current_user&.gravatar_url, class: "rounded-circle", style: "width: 25px; height: 25px;" if current_user %>
+      <%= link_to "Logged in as: " + current_user&.email, user_show_path(current_user) if current_user %>
+      <%= link_to "Sign out", signout_url, class: "btn btn-sm btn-secondary float-right pr-2", role: "button", id: "sign_in" if logged_in? %>
+
     </footer>
   </body>
 </html>
