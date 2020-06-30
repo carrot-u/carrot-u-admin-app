@@ -1,2 +1,0 @@
-class CourseSessionUser < ApplicationRecord
-end

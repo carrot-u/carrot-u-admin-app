@@ -31,19 +31,6 @@ ActiveRecord::Schema.define(version: 2020_06_23_182731) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "course_session_users", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "course_session_id"
-    t.string "role"
-    t.boolean "notification_sent"
-    t.datetime "manager_approved_at"
-    t.datetime "accepted_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["course_session_id"], name: "index_course_session_users_on_course_session_id"
-    t.index ["user_id"], name: "index_course_session_users_on_user_id"
-  end
-
   create_table "course_sessions", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -56,7 +43,7 @@ ActiveRecord::Schema.define(version: 2020_06_23_182731) do
     t.index ["lectures_id"], name: "index_course_sessions_on_lectures_id"
   end
 
-  create_table "homeworks", force: :cascade do |t|
+    create_table "homeworks", force: :cascade do |t|
     t.text "content"
     t.bigint "lecture_id"
     t.text "status"
@@ -126,6 +113,4 @@ ActiveRecord::Schema.define(version: 2020_06_23_182731) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "course_sessions", "lectures", column: "lectures_id"
-  add_foreign_key "lectures", "course_sessions"
 end
