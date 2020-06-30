@@ -28,4 +28,7 @@ Rails.application.routes.draw do
 
   #signing up to be a mentor
 
+ #mentor routes
+  get '/mentors', to: 'mentors#index'
+
 end
