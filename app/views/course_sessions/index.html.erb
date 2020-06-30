@@ -8,8 +8,8 @@
     <div class="card bg-white mb-3" style="max-width: 100rem;">
       <div class="card-header">
         <%= course_session.name %>
-        <%= link_to fa_icon("trash"), course_session, class: "float-right px-3", method: :delete, data: { confirm: 'Are you sure?' }  %>
-        <%= link_to fa_icon("edit"), edit_course_session_path(course_session), class: "float-right" %>
+        <%= link_to fa_icon("trash"), course_session, class: "float-right px-3", method: :delete, data: { confirm: 'Are you sure?' } if @current_user.admin %>
+        <%= link_to fa_icon("edit"), edit_course_session_path(course_session), class: "float-right" if @current_user.admin %>
       </div>
       <div class="card-title p-3">
         <h5><%= "Starts " + course_session.start_to_s %></h5>
@@ -21,7 +21,9 @@
     </div>
   <% end %>
 
+  <% if @current_user.admin %>
     <div class = "card px-3 py-3 mb-3">
       <%= link_to '+ Add Course Session', new_course_session_path %>
     </div>
+  <% end %>
 </div>

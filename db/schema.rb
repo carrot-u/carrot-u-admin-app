@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_17_025218) do
+ActiveRecord::Schema.define(version: 2020_06_23_182731) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,19 +29,6 @@ ActiveRecord::Schema.define(version: 2020_06_17_025218) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "course_session_users", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "course_session_id"
-    t.string "role"
-    t.boolean "notification_sent"
-    t.datetime "manager_approved_at"
-    t.datetime "accepted_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["course_session_id"], name: "index_course_session_users_on_course_session_id"
-    t.index ["user_id"], name: "index_course_session_users_on_user_id"
   end
 
   create_table "course_sessions", force: :cascade do |t|
@@ -67,7 +54,7 @@ ActiveRecord::Schema.define(version: 2020_06_17_025218) do
     t.index ["homework_id"], name: "index_homework_submissions_on_homework_id"
   end
 
-  create_table "homeworks", force: :cascade do |t|
+    create_table "homeworks", force: :cascade do |t|
     t.text "content"
     t.bigint "lecture_id"
     t.text "status"
@@ -86,6 +73,7 @@ ActiveRecord::Schema.define(version: 2020_06_17_025218) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "course_session_id"
+    t.datetime "schedule_date"
     t.index ["course_session_id"], name: "index_lectures_on_course_session_id"
     t.index ["homework_id"], name: "index_lectures_on_homework_id"
     t.index ["teacher_id"], name: "index_lectures_on_teacher_id"
@@ -131,6 +119,7 @@ ActiveRecord::Schema.define(version: 2020_06_17_025218) do
     t.string "last_sign_in_ip"
     t.string "id_token"
     t.string "token"
+    t.boolean "admin", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

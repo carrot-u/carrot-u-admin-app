@@ -1,3 +1,5 @@
+<if @is_mentor %>
+  <p> You have already signed up </p>
 <%= form_with(model: mentor, local: true) do |form| %>
   <% if mentor.errors.any? %>
     <div id="error_explanation">
@@ -55,3 +57,5 @@
     <%= form.submit %>
   </div>
 <% end %>
+
+</end>
