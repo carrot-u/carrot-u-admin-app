@@ -43,6 +43,17 @@ ActiveRecord::Schema.define(version: 2020_06_23_182731) do
     t.index ["lectures_id"], name: "index_course_sessions_on_lectures_id"
   end
 
+  create_table "homework_submissions", force: :cascade do |t|
+    t.bigint "course_session_user_id", null: false
+    t.bigint "homework_id", null: false
+    t.string "pull_request"
+    t.boolean "is_public"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_session_user_id"], name: "index_homework_submissions_on_course_session_user_id"
+    t.index ["homework_id"], name: "index_homework_submissions_on_homework_id"
+  end
+
     create_table "homeworks", force: :cascade do |t|
     t.text "content"
     t.bigint "lecture_id"
@@ -113,4 +124,8 @@ ActiveRecord::Schema.define(version: 2020_06_23_182731) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "course_sessions", "lectures", column: "lectures_id"
+  add_foreign_key "homework_submissions", "course_session_users"
+  add_foreign_key "homework_submissions", "homeworks"
+  add_foreign_key "lectures", "course_sessions"
 end

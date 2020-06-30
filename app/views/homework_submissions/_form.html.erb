@@ -1,0 +1,40 @@
+<%= form_with(model: homework_submission, local: true) do |form| %>
+  <% if homework_submission.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(homework_submission.errors.count, "error") %> prohibited this homework_submission from being saved:</h2>
+
+      <ul>
+        <% homework_submission.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= form.hidden_field :homework_id, value: params[:format] %>
+  </div>
+
+  <div class="field">
+    <%= form.label :homework_id %>
+    <%= @homework_submission.homework_id %>
+  </div>
+
+  <div class = "field">
+    <%= form.label :course_session_user_id %>
+    <%= @homework_submission.course_session_user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pull_request %>
+    <%= form.text_field :pull_request %>
+  </div>
+
+  <div class="field">
+    <%= form.label :is_public %>
+    <%= form.check_box :is_public %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

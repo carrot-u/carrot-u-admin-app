@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  course_session_user: one
+  homework: one
+  pull_request: MyString
+  is_public: false
+
+two:
+  course_session_user: two
+  homework: two
+  pull_request: MyString
+  is_public: false
