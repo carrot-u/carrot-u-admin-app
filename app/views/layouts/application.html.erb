@@ -12,8 +12,8 @@
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 
-<body class="d-flex flex-column h-100">
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<body class="d-flex flex-column h-100" style="padding-top: 100px">
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
   <a class="navbar-brand" href="#"><%= image_tag ("logo.png"), width: 64 %>Carrot University</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -21,43 +21,41 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
+      <li class="nav-item <%= controller_name == "welcome" ? "active" : "" %>">
         <a class="nav-link" href="/">Home</a>
       </li>
-      <li class="nav-item <%= controller_name == "welcome" ? "active" : "" %>">
+      <li class="nav-item <%= controller_name == "help" ? "active" : "" %>">
         <a class="nav-link" href="/help/index">About</a>
       </li>
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown <%= controller_name == "students" ? "active" : "" %>">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Students
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Apply</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a class="dropdown-item" href="#">Schedule</a>
+          <a class="dropdown-item" href="#">Syllabus</a>
+          <a class="dropdown-item" href="#">Assignments</a>
         </div>
       </li>
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown <%= controller_name == "mentors" ? "active" : "" %>">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Mentors
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="<%= new_mentor_path %>">Volunteer</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a class="dropdown-item" href="#">Mentees</a>
         </div>
       </li>
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown <%= controller_name == "admins" ? "active" : "" %>">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Admins
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a class="dropdown-item" href="<%= course_sessions_path %>">Course sessions</a>
+          <a class="dropdown-item" href="<%= admins_path %>">Users</a>
         </div>
       </li>
     </ul>
@@ -74,32 +72,10 @@
   </div>
 </nav>
 <div class="content">
-  <!--
-      <header class="masthead mb-auto py-3">
-        <div>
-          <h3 class="masthead-brand">Carrot-U</h3>
-          <% if logged_in? %>
-          <nav class="nav nav-masthead justify-content-center">
-            <%= link_to "About", root_path, class: ('active' if controller_name == 'welcome'), role: "article", id: "home" %>
-            <%= link_to "Course Sessions", course_sessions_path, class: ('active' if controller_name == 'course_sessions'), role: "article", id: "sessions" %>
-            <div class="nested">
-              <h4>I want to</h4>
-              <a class="nav-link" href="#">become a student</a>
-              <%= link_to "be a mentor", new_mentor_path, class: ('active' if controller_name == 'mentors'), role: "article", id: "mentors" %>
-            </div>
-            <%= link_to "Admins", admins_path, class: ('active' if controller_name == 'admins'), role: "article", id: "admins" %>
-
-          </nav>
-          <% else %>
-            <%= link_to "Sign in", login_url, class: "btn btn-lg btn-primary", role: "button", id: "sign_in" if !logged_in? %>
-          <% end %>
-        </div>
-      </header>
-      -->
   <%= yield %>
 </div>
 <footer class="mastfoot mt-auto">
-&copy 2020 Carrot University
+  &copy 2020 Carrot University
 </footer>
 </body>
 </html>
