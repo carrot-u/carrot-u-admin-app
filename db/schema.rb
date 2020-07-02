@@ -15,6 +15,16 @@ ActiveRecord::Schema.define(version: 2020_06_23_182731) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "application_answers", force: :cascade do |t|
+    t.bigint "application_question_id", null: false
+    t.bigint "user_id", null: false
+    t.text "answer"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["application_question_id"], name: "index_application_answers_on_application_question_id"
+    t.index ["user_id"], name: "index_application_answers_on_user_id"
+  end
+
   create_table "application_questions", force: :cascade do |t|
     t.text "text"
     t.string "role"
@@ -44,17 +54,17 @@ ActiveRecord::Schema.define(version: 2020_06_23_182731) do
   end
 
   create_table "homework_submissions", force: :cascade do |t|
-    t.bigint "course_session_user_id", null: false
+    t.bigint "user_id", null: false
     t.bigint "homework_id", null: false
     t.string "pull_request"
     t.boolean "is_public"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["course_session_user_id"], name: "index_homework_submissions_on_course_session_user_id"
     t.index ["homework_id"], name: "index_homework_submissions_on_homework_id"
+    t.index ["user_id"], name: "index_homework_submissions_on_user_id"
   end
 
-    create_table "homeworks", force: :cascade do |t|
+  create_table "homeworks", force: :cascade do |t|
     t.text "content"
     t.bigint "lecture_id"
     t.text "status"
@@ -101,6 +111,18 @@ ActiveRecord::Schema.define(version: 2020_06_23_182731) do
     t.index ["updated_at"], name: "index_sessions_on_updated_at"
   end
 
+  create_table "students", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.boolean "is_active"
+    t.boolean "is_approved"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_students_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -124,8 +146,20 @@ ActiveRecord::Schema.define(version: 2020_06_23_182731) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "users_managers", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "manager_email"
+    t.boolean "current"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_users_managers_on_user_id"
+  end
+
+  add_foreign_key "application_answers", "application_questions"
+  add_foreign_key "application_answers", "users"
   add_foreign_key "course_sessions", "lectures", column: "lectures_id"
-  add_foreign_key "homework_submissions", "course_session_users"
   add_foreign_key "homework_submissions", "homeworks"
+  add_foreign_key "homework_submissions", "users"
   add_foreign_key "lectures", "course_sessions"
+  add_foreign_key "users_managers", "users"
 end
