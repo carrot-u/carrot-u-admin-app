@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>CarrotUAdmin</title>
+    <title>Carrot-U Admin</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <%= stylesheet_link_tag 'application', 'home', 'sessions_lectures', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -17,14 +16,14 @@
           <h3 class="masthead-brand">Carrot-U</h3>
           <% if logged_in? %>
           <nav class="nav nav-masthead justify-content-center">
-            <%= link_to "About", root_path,  class: "nav-link", role: "article", id: "home" %>
-            <%= link_to "Course Sessions", course_sessions_path, class: "nav-link", role: "article", id: "sessions" %>
+            <%= link_to "About", root_path, class: ('active' if controller_name=='welcome'), role: "article", id: "home" %>
+            <%= link_to "Course Sessions", course_sessions_path, class: ('active' if controller_name=='course_sessions'), role: "article", id: "sessions" %>
             <div class="nested">
               <h4>I want to</h4>
               <a class="nav-link" href="#">become a student</a>
-              <%= link_to "be a mentor",new_mentor_path, class: "nav-link", role: "article", id: "mentors"  %>
+              <%= link_to "be a mentor",new_mentor_path, class: ('active' if controller_name=='mentors'), role: "article", id: "mentors"  %>
             </div>
-            <%= link_to "Admins", admins_path, class: "nav-link", role: "article", id: "admins" %>
+            <%= link_to "Admins", admins_path, class: ('active' if controller_name=='admins'), role: "article", id: "admins" %>
 
           </nav>
           <% else %>

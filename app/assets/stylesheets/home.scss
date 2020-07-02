@@ -26,8 +26,8 @@
 }
 // nav for homepage/app
 .nav-masthead {
-	.nav-link {
-		font-weight: 700;
+	a {
+		font-weight: 500;
 		background-color: transparent;
 		border-bottom: .25rem solid transparent;
 		&:hover {
@@ -36,16 +36,16 @@
 		&:focus {
 			border-bottom-color: rgba(255, 255, 255, .25);
 		}
+		width: 9em;
 	}
 	.nested {
 		margin: 0em;
 		padding: 0em;
 		h4 {
 			font-size: 12pt;
-			font-weight: 700;
 			background-color: transparent;
 			margin: 0em;
-			margin-top: 0.65em;
+			width: 9em;
 			padding: 0em;
 			&:hover {
 				border-bottom-color: rgba(255, 255, 255, .25);
@@ -60,7 +60,8 @@
 		}
 	}
 	.active {
-		border-bottom-color: #ccc;
+		//border-bottom-color: #ccc;
+		font-weight: 900;
 	}
 }
 
