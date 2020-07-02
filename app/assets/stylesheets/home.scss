@@ -26,8 +26,8 @@
 }
 // nav for homepage/app
 .nav-masthead {
-	.nav-link {
-		font-weight: 700;
+	a {
+		font-weight: 500;
 		background-color: transparent;
 		border-bottom: .25rem solid transparent;
 		&:hover {
@@ -36,11 +36,35 @@
 		&:focus {
 			border-bottom-color: rgba(255, 255, 255, .25);
 		}
+		width: 9em;
+	}
+	.nested {
+		margin: 0em;
+		padding: 0em;
+		h4 {
+			font-size: 12pt;
+			background-color: transparent;
+			margin: 0em;
+			width: 9em;
+			padding: 0em;
+			&:hover {
+				border-bottom-color: rgba(255, 255, 255, .25);
+			}
+			&:focus {
+				border-bottom-color: rgba(255, 255, 255, .25);
+			}
+		}
+		.nav-link {
+			margin: 0em;
+			padding: 0em;
+		}
 	}
 	.active {
-		border-bottom-color: #ccc;
+		//border-bottom-color: #ccc;
+		font-weight: 900;
 	}
 }
+
 // main div rendering content
 .content {
 	padding: 0 1.5rem;
@@ -61,4 +85,12 @@
 .cu-header {
 	display: block;
 	text-align: center;
+}
+
+.notice {
+	background-color: #F08080;
+	color: white;
+	font-weight: bold;
+	font-size: 14pt;
+	padding: 0.2em;
 }
