@@ -6,7 +6,7 @@ class CreateStudents < ActiveRecord::Migration[6.0]
       t.string :email
       t.boolean :is_active
       t.boolean :is_approved
-      t.reference :user
+      t.references :user
 
       t.timestamps
     end
