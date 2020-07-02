@@ -37,10 +37,33 @@
 			border-bottom-color: rgba(255, 255, 255, .25);
 		}
 	}
+	.nested {
+		margin: 0em;
+		padding: 0em;
+		h4 {
+			font-size: 12pt;
+			font-weight: 700;
+			background-color: transparent;
+			margin: 0em;
+			margin-top: 0.65em;
+			padding: 0em;
+			&:hover {
+				border-bottom-color: rgba(255, 255, 255, .25);
+			}
+			&:focus {
+				border-bottom-color: rgba(255, 255, 255, .25);
+			}
+		}
+		.nav-link {
+			margin: 0em;
+			padding: 0em;
+		}
+	}
 	.active {
 		border-bottom-color: #ccc;
 	}
 }
+
 // main div rendering content
 .content {
 	padding: 0 1.5rem;
