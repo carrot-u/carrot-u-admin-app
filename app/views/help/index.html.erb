@@ -1,0 +1,195 @@
+<%
+  # put each paragraph of the answer in a separate string in the answer array
+  faqs = [
+      {
+          title: "Student FAQs",
+          name: "students",
+          content: [
+              {
+                  question: "How long are the classes and how many can I take?",
+                  answer: [
+                      "The entire session takes 5-6 months to complete. We do not currently have individual courses available, but hope to in the future."
+                  ]
+              },
+              {
+                  question: "How many students can join?",
+                  answer: [
+                      "The number of students is limited by the number of mentors available, but people who are not accepted as full students with mentorship can still audit the course. Past sessions have had 10-20 students."
+                  ]
+              },
+              {
+                  question: "What if I’m accepted into the program but cannot commit to participating throughout the entire course?",
+                  answer: [
+                      "We will prioritize accepting students who will commit to the full course, but we understand that we’re asking a lot of people. More than half of the students each year have not completed the course, but we hope the experience was still valuable.",
+                      "If you definitely cannot commit to the entire course, you are still free to audit any or all of the sessions."
+                  ]
+              },
+              {
+                  question: "What happens after the course is over?",
+                  answer: [
+                      "People who complete the course can apply for engineering internships at Instacart, which may lead to full-time engineering positions.",
+                      "For every student who has completed the course and wishes to, the administrators of the program will find teams willing to take on interns. You will be able to interview for one of the available internships.",
+                      "While we do not guarantee anything in this regard, each session so far has allowed everyone who completed it to move on to a new career."
+                  ]
+              },
+              {
+                  question: "How can I register?",
+                  answer: [
+                      "If there is an upcoming session of the course, you can fill out <a href=\"#\">the application</a>.",
+                      "If there is not yet a session scheduled, you can <a href=\"#\">register your email</a> to receive an email when a new session is available."
+                  ]
+              },
+              {
+                  question: "Who is eligible to register?",
+                  answer: [
+                      "Full-time employees of Instacart who have been in their current position for at least six months.",
+                      "Your manager must approve your application."
+                  ]
+              },
+              {
+                  question: "How much will this cost?",
+                  answer: [
+                      "The program is free."
+                  ]
+              },
+              {
+                  question: "How much time will be required of me?",
+                  answer: [
+                      "We expect that 20 hours a week will be sufficient to do all the course work.",
+                      "There will be a 1-2 hour lecture and/or discussion session each week, plus a mentor meeting; the rest of the time is up to you to schedule."
+                  ]
+              },
+              {
+                  question: "Do we need previous experience in computer science?",
+                  answer: [
+                      "No. It is of course always helpful, but we start from the basics."
+                  ]
+              },
+              {
+                  question: "Is a laptop provided? If not, is there a preference on what we use?",
+                  answer: [
+                      "All of the course materials assume you have a MacBook.",
+                      "We have made arrangements in the past for students to use company-provided MacBooks when they do not already have one for their job, but this is not guaranteed, so make sure to ask about it in advance."
+                  ]
+              },
+              {
+                  question: "What does an internship at Instacart look like?",
+                  answer: [
+                      "You are a regular member of the development team. You will work on bugs and features like any other engineer, but with a mentor who will answer questions and help you learn how our software works. At the end of the internship, you will be evaluated on your performance, and if all goes well you will transition to being a regular employee."
+                  ]
+              },
+              {
+                  question: "If I’m accepted into the internship program, will I move to San Francisco or intern remotely?",
+                  answer: [
+                      "In the past, all internships were in the SF office, but due to the pandemic we have created recommendations for how to run remote internships.",
+                      "It will be up to the individual teams to decide if they are comfortable with remote interns."
+                  ]
+              },
+              {
+                  question: "How can I apply what I learn in the course?",
+                  answer: [
+                      "Regardless of the specific work you do, when working for a company that has technology to run its core business it is useful to know something about the inner workings of that technology. The content of the course is specifically designed for people interested in becoming engineers, but it is also useful for anyone who needs to interact with engineers, or who just wants to be more familiar with the tools they use every day."
+                  ]
+              },
+              {
+                  question: "Will we learn how to build a portfolio for future job opportunities?",
+                  answer: [
+                      "No, we are focused on engineering at Instacart.",
+                      "The experience is still applicable to other jobs but we do not currently spend time on a more general approach to getting an engineering job."
+                  ]
+              },
+              {
+                  question: "What topics are covered in the course?",
+                  answer: [
+                      "The recorded video covers SQL, HTML, CSS, Ruby, Rails, and React.",
+                      "The supplemental lectures by Instcart engineers cover many topics which we consider useful for the day-to-day job of an engineer, such as GitHub, algorithms and data structures, security, and engineering job interviews.",
+                      "<a href=\"#\">Syllabus</a>"
+                  ]
+              },
+              {
+                  question: "Is there a class schedule?",
+                  answer: [
+                      "No. We schedule one session at a time, and each session we make modifications to the schedule before and during the course as needed.",
+                      "<a href=\"\">Most recent schedule</a>"
+                  ]
+              },
+              {
+                  question: "Can I receive additional help when I don’t understand a topic?",
+                  answer: [
+                      "Each student is assigned a mentor who will be available to answer questions. Most lectures also include references to supplementary material. We also try to teach you to find the answers for yourself, notably through Google and Stack Overflow.",
+                      "In addition, we have a Slack channel #carrot-university where you can ask questions and get answers from any mentor or other students."
+                  ]
+              },
+              {
+                  question: "What does it mean to audit the course?",
+                  answer: [
+                      "Auditors will not be assigned mentors, but can participate in all other ways, including asking questions and getting answers in Slack.",
+                      "We are limited by the number of mentors available, but as people drop out mentors may become available for auditors.",
+                      "Auditors who complete the course will also be eligible to apply for internships."
+                  ]
+              }
+          ],
+      },
+      {
+          title: "Mentor FAQs",
+          name: "mentors",
+          content: [
+              {
+                  question: "Who can be a mentor?",
+                  answer: [
+                      "Any engineer can be a mentor, subject to manager approval."
+]
+              },
+              {
+                  question: "How do I become a mentor?",
+                  answer: [
+                      "You can apply to be a mentor <a href=\"\">here</a>."
+                  ]
+              },
+              {
+                  question: "Why should I become a mentor?",
+                  answer: [
+                      "Mentorship has many benefits, but notably it is a way for you to grow in your career, as well expanding the breadth and depth of your knowledge of the subjects being taught.",
+                      "Since the students come from non-engineering parts of Instacart, It also gives you some insight into how the rest of the business operates."
+                  ]
+              }
+
+          ]
+      }
+  ]
+%>
+<h2>What is Carrot University?</h2>
+<p>
+Carrot University is Instacart’s internal coding bootcamp; the program teaches people with any level of experience,
+including none, the skills needed to be a full-stack engineer.
+</p>
+<p>
+  The course consists of online training content supplemented by talks and mentorship from senior engineers at Instacart.
+</p>
+<% faqs.each do |section| %>
+  <a name="<%= section[:name] %>" href="#"></a>
+  <h2><%= section[:title] %></h2>
+  <div class="accordion" id="faq">
+    <% section[:content].each_with_index do |faq, index| %>
+      <div class="card">
+        <div class="card-header" id="faq<%= index %>">
+          <h2 class="mb-0">
+            <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
+                    data-target="#answer<%= index %>" aria-expanded="true" aria-controls="answer<%= index %>">
+              <%= faq[:question] %>
+            </button>
+          </h2>
+        </div>
+        <div id="answer<%= index %>" class="collapse" aria-labelledby="faq<%= index %>" data-parent="#faq">
+          <div class="card-body">
+            <% faq[:answer].each do |paragraph| %>
+              <p>
+                <%= raw(paragraph) %>
+              </p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
