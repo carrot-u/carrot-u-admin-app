@@ -19,4 +19,8 @@ class ApplicationController < ActionController::Base
     session[:previous_url] = request.fullpath if request.format.html?
     redirect_to root_path
   end
+
+  def admin?
+    logged_in? && current_user.admin
+  end
 end

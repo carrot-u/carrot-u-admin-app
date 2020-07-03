@@ -1,0 +1,31 @@
+<div class="alert alert-error">
+  <%= @notice %>
+</div>
+<% if @course_session %>
+  <div class="alert alert-success">
+    There is a session of Carrot U starting on <%= @course_session.start_to_s %>. Fill out this form to apply.
+  </div>
+  [Application form goes here.]
+<% elsif @waiting_list %>
+  <div class="alert alert-success">
+    <p>
+      There is not currently a session of Carrot U planned.
+    </p>
+    <p>
+      You are on the waiting list for the next available session.
+    </p>
+  </div>
+<% else %>
+  <div class="alert alert-primary">
+    <p>
+      There is not currently a session of Carrot U planned. Click below to be added to the waiting list.
+    </p>
+    <p>
+      You will receive an email as soon as a new session opens up, and you can fill out your application at that time.
+    </p>
+  </div>
+  <div class="text-center">
+    <%= link_to "Add #{@current_user.email} to the waiting list", students_waitlist_url, class: "btn btn-lg btn-primary", role: "button", id: "waitlist", method: :post %>
+  </div>
+<% end %>
+

@@ -1,0 +1,29 @@
+<p id="notice"><%= @notice %></p>
+
+<% unless @notice %>
+<p>
+  The following students are currently waiting for a session of Carrot U.
+</p>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <h5>Student email</h5>
+    </div>
+    <div class="col-sm">
+      <h5>Added to waitlist</h5>
+    </div>
+  </div>
+    <% @waiting_list.each do |waiting_list| %>
+    <div class="row">
+      <div class="col-sm">
+        <%= waiting_list.user.email %>
+      </div>
+      <div class="col-sm">
+        <%= waiting_list.created_at %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+<% end %>

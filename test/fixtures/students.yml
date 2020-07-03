@@ -6,7 +6,6 @@ one:
   email: MyString
   is_active: false
   is_approved: false
-  user: 
 
 two:
   first_name: MyString
@@ -14,4 +13,3 @@ two:
   email: MyString
   is_active: false
   is_approved: false
-  user: 

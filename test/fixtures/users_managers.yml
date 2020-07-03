@@ -1,11 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  user: one
-  manager: one
-  current: false
-
-two:
-  user: two
-  manager: two
-  current: false
+# TODO @muffy - getting error ActiveRecord::Fixture::FixtureError: table "users_managers" has no columns named "manager_id".
+#one:
+#  user: one
+#  manager: one
+#  current: false
+#
+#two:
+#  user: two
+#  manager: two
+#  current: false

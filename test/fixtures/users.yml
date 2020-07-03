@@ -1,0 +1,12 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+student:
+  email: student.name@instacart.com
+  admin: false
+
+admin:
+  email: admin.name@instacart.com
+  admin: true
+
+waitlisted_student:
+  email: student.waitlisted@instacart.com
+  admin: false

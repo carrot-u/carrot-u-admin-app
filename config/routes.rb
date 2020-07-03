@@ -29,7 +29,14 @@ Rails.application.routes.draw do
 
   #signing up to be a mentor
 
- #mentor routes
+  #mentor routes
   get '/mentors', to: 'mentors#index'
 
+
+  #
+  # Students
+  #
+  get "students/apply"
+  post "students/waitlist"
+  get "students/waiting_list"
 end
