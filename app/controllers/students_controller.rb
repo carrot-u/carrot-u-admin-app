@@ -66,7 +66,7 @@ class StudentsController < ApplicationController
   end
 
   # POST /students/waitlist
-  # Add a student to the waiting list for the next available scourse
+  # Add a student to the waiting list for the next available course session
   def waitlist
     # ensure the student isn't already on the waiting list
     @waiting_list = WaitingList.find_or_create_by(user: current_user, course_session: nil)
