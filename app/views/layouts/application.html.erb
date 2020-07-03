@@ -53,11 +53,12 @@
       </li>
       <li class="nav-item dropdown <%= controller_name == "admins" ? "active" : "" %>">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Admins
+          Admin
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="<%= course_sessions_path %>">Course sessions</a>
-          <a class="dropdown-item" href="<%= admins_path %>">Users</a>
+          <a class="dropdown-item" href="<%= users_path %>">Users</a>
+          <a class="dropdown-item" href="<%= application_questions_path %>">Application questions</a>
         </div>
       </li>
     </ul>
