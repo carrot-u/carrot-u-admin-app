@@ -12,4 +12,13 @@ class User < ApplicationRecord
   def created_date_local
     self.created_at.localtime.strftime('%m-%d-%y')
   end
+
+  # meh, it's not great but its the best we can do until we separate the name attribute
+  def first_name
+    name.split.first
+  end
+
+  def last_name
+    name.split.last
+  end
 end
