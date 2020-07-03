@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_03_142703) do
+ActiveRecord::Schema.define(version: 2020_07_03_220508) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,18 @@ ActiveRecord::Schema.define(version: 2020_07_03_142703) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "course_session_participants", force: :cascade do |t|
+    t.bigint "course_session_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "manager_approved_at"
+    t.datetime "accepted_at"
+    t.string "role", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_session_id"], name: "index_course_session_participants_on_course_session_id"
+    t.index ["user_id"], name: "index_course_session_participants_on_user_id"
   end
 
   create_table "course_sessions", force: :cascade do |t|
@@ -148,10 +160,11 @@ ActiveRecord::Schema.define(version: 2020_07_03_142703) do
 
   create_table "users_managers", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.string "manager_email"
     t.boolean "current"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "manager_id"
+    t.index ["manager_id"], name: "index_users_managers_on_manager_id"
     t.index ["user_id"], name: "index_users_managers_on_user_id"
   end
 
@@ -167,11 +180,14 @@ ActiveRecord::Schema.define(version: 2020_07_03_142703) do
 
   add_foreign_key "application_answers", "application_questions"
   add_foreign_key "application_answers", "users"
+  add_foreign_key "course_session_participants", "course_sessions"
+  add_foreign_key "course_session_participants", "users"
   add_foreign_key "course_sessions", "lectures", column: "lectures_id"
   add_foreign_key "homework_submissions", "homeworks"
   add_foreign_key "homework_submissions", "users"
   add_foreign_key "lectures", "course_sessions"
   add_foreign_key "users_managers", "users"
+  add_foreign_key "users_managers", "users", column: "manager_id"
   add_foreign_key "waiting_lists", "course_sessions"
   add_foreign_key "waiting_lists", "users"
 end

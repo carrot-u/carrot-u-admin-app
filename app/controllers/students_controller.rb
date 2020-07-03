@@ -1,52 +1,10 @@
 class StudentsController < ApplicationController
+  before_action :set_open_course_session, only: [:apply, :application]
+  before_action :set_student, only: [:application]
+
 =begin
-  # TODO @muffy - may not use any of this, keeping it for reference for now
-  before_action :set_student, only: [:show, :edit, :update, :destroy]
-
-  # GET /students
-  # GET /students.json
-  def index
-    @students = Student.all
-  end
-
-  # GET /students/1
-  # GET /students/1.json
-  def show
-  end
-
-  # GET /students/1/edit
-  def edit
-  end
-
-  # PATCH/PUT /students/1
-  # PATCH/PUT /students/1.json
-  def update
-    respond_to do |format|
-      if @student.update(student_params)
-        format.html { redirect_to @student, notice: 'Waiting list was successfully updated.' }
-        format.json { render :show, status: :ok, location: @student }
-      else
-        format.html { render :edit }
-        format.json { render json: @student.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /students/1
-  # DELETE /students/1.json
-  def destroy
-    @student.destroy
-    respond_to do |format|
-      format.html { redirect_to students_url, notice: 'Waiting list was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_student
-      @student = Student.find(params[:id])
-    end
 
     # Only allow a list of trusted parameters through.
     def student_params
@@ -57,11 +15,24 @@ class StudentsController < ApplicationController
   # GET /students/apply
   # Allow a student to apply for the upcoming course session, if there is one
   def apply
-    @course_session = CourseSession.accepting_applications.first
     if @course_session.nil?
       @waiting_list = WaitingList.current.where(user: current_user).first
+    else
+      set_student
     end
 
+    render :apply
+  end
+
+  # POST /students/application
+  # Save the manager info and application answers for a student
+  def application
+    # Record the manager email
+    manager = User.find_or_create_by(email: application_params[:manager_email])
+    UsersManager.current.find_or_create_by(user: current_user, manager: manager)
+
+    @student.save!
+    # TODO @muffy - save application answers
     render :apply
   end
 
@@ -87,5 +58,20 @@ class StudentsController < ApplicationController
       @waiting_list = []
       @notice = "You must be an admin to view the waiting list."
     end
+  end
+
+  private
+
+  # Only allow a list of trusted parameters through.
+  def application_params
+    params.permit(:manager_email)
+  end
+
+  def set_open_course_session
+    @course_session = CourseSession.accepting_applications.first
+  end
+
+  def set_student
+    @student = CourseSessionParticipant.student.find_or_initialize_by(user: current_user, course_session: @course_session)
   end
 end

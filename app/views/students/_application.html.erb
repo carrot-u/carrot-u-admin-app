@@ -1,0 +1,17 @@
+<%= form_with url: students_application_path do  |form| %>
+  <div class="card p-5" style="width: 48rem;">
+    <div class="form-group">
+      <%= form.label :manager_email, class: "input-group mb-3" %>
+      <%= form.text_field :manager_email, class: "form-control" %>
+      <div class="text-warning">
+        Your manager must approve your application before you will be considered for the course.
+      </div>
+    </div>
+
+    <!-- TODO @muffy - put application questions here -->
+
+    <div class="actions">
+      <%= form.submit class: "btn btn-primary" %>
+    </div>
+<% end %>
+</div>

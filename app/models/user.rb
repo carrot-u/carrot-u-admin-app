@@ -2,6 +2,7 @@
 require "digest"
 
 class User < ApplicationRecord
+  has_many :users_managers
 
   # creates MD5 hash of lowercase email and formats image url for gravatar avatar
   def gravatar_url
@@ -11,5 +12,9 @@ class User < ApplicationRecord
 
   def created_date_local
     self.created_at.localtime.strftime('%m-%d-%y')
+  end
+
+  def manager
+    self.users_managers.current.first&.manager
   end
 end
