@@ -1,13 +1,20 @@
-<table>
+
+<div class="container mb-auto py-3 text-center">
+  <h2>Student application questions</h2>
+</div>
+<%= link_to 'New question', new_application_question_path, class: 'btn btn-primary'%>
+
+<p>
+<table class="table">
   <thead>
     <tr>
-      <th>ID</th>
-      <th>Text</th>
-      <th>Role name</th>
-      <th>Current</th>
-      <th>Created at</th>
-      <th>Updated at</th>
-      <th colspan="5"></th>
+      <th scope="col">ID</th>
+      <th scope="col">Text</th>
+      <th scope="col">Role name</th>
+      <th scope="col">Current</th>
+      <th scope="col">Created at</th>
+      <th scope="col">Updated at</th>
+      <th scope="col" colspan="5"></th>
     </tr>
   </thead>
 
@@ -20,11 +27,11 @@
         <td><%= question.current %></td>
         <td><%= question.created_at %></td>
         <td><%= question.updated_at %></td>
-        <td><%= link_to 'Update', edit_application_question_path(question), method: :get %></td>
-        <td><%= link_to 'Destroy', application_question_path(question), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Update', edit_application_question_path(question), class: "btn btn-info", method: :get %></td>
+        <td><%= link_to 'Destroy', application_question_path(question), class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to 'New Application Question', new_application_question_path %>
+

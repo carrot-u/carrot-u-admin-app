@@ -1,8 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Mentors</h1>
+<div class="container mb-auto py-3 text-center">
+  <h2>Mentors</h2>
+</div>
 
-<table>
+<p><%= link_to 'New Mentor', new_mentor_path, class: "btn btn-primary" %></p>
+
+<table class="table">
   <thead>
     <tr>
       <th>First name</th>
@@ -13,7 +17,7 @@
       <th>Is active</th>
       <th>Is approved</th>
       <th>Skills</th>
-      <th colspan="3"></th>
+      <th>Actions</th>
     </tr>
   </thead>
 
@@ -28,9 +32,9 @@
         <td><%= mentor.is_active %></td>
         <td><%= mentor.is_approved %></td>
         <td><%= mentor.skills %></td>
-        <td><%= link_to 'Show', mentor %></td>
-        <td><%= link_to 'Edit', edit_mentor_path(mentor) %></td>
-        <td><%= link_to 'Destroy', mentor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= link_to 'Edit', edit_mentor_path(mentor), class: "btn btn-info" %>
+          <%= link_to 'Destroy', mentor, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
       </tr>
     <% end %>
   </tbody>
@@ -38,4 +42,3 @@
 
 <br>
 
-<%= link_to 'New Mentor', new_mentor_path %>
