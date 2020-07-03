@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_23_182731) do
+ActiveRecord::Schema.define(version: 2020_07_03_142703) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -155,6 +155,16 @@ ActiveRecord::Schema.define(version: 2020_06_23_182731) do
     t.index ["user_id"], name: "index_users_managers_on_user_id"
   end
 
+  create_table "waiting_lists", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "course_session_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_session_id"], name: "index_waiting_lists_on_course_session_id"
+    t.index ["user_id", "course_session_id"], name: "index_waiting_lists_on_user_id_and_course_session_id"
+    t.index ["user_id"], name: "index_waiting_lists_on_user_id"
+  end
+
   add_foreign_key "application_answers", "application_questions"
   add_foreign_key "application_answers", "users"
   add_foreign_key "course_sessions", "lectures", column: "lectures_id"
@@ -162,4 +172,6 @@ ActiveRecord::Schema.define(version: 2020_06_23_182731) do
   add_foreign_key "homework_submissions", "users"
   add_foreign_key "lectures", "course_sessions"
   add_foreign_key "users_managers", "users"
+  add_foreign_key "waiting_lists", "course_sessions"
+  add_foreign_key "waiting_lists", "users"
 end

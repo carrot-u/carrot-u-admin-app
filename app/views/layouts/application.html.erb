@@ -32,7 +32,7 @@
           Students
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Apply</a>
+          <a class="dropdown-item" href="/students/apply">Apply</a>
           <a class="dropdown-item" href="/help/index#students">FAQ</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Schedule</a>
@@ -56,6 +56,7 @@
           Admins
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="<%= students_waiting_list_path %>">Waiting List</a>
           <a class="dropdown-item" href="<%= course_sessions_path %>">Course sessions</a>
           <a class="dropdown-item" href="<%= admins_path %>">Users</a>
         </div>

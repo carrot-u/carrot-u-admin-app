@@ -10,4 +10,11 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  def sign_in_as(user)
+    post '/auth/developer/callback', params: {email: user.email}
+  end
+
+  def sign_out
+    get logout_path
+  end
 end
