@@ -32,11 +32,11 @@ Rails.application.routes.draw do
   #mentor routes
   get '/mentors', to: 'mentors#index'
 
-
   #
   # Students
   #
   get "students/apply"
   post "students/waitlist"
   get "students/waiting_list"
+  post "students/application"
 end

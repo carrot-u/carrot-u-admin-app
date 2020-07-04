@@ -1,7 +1,10 @@
 class CourseSession < ApplicationRecord
   has_many :lectures
+  has_many :course_session_participants
   before_destroy :destroy_lectures
   validates :name, presence: true
+
+  scope :students, -> { joins(:course_session_participants).merge(CourseSessionParticipant.student) }
 
   #
   # Class methods

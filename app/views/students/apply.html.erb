@@ -3,9 +3,21 @@
 </div>
 <% if @course_session %>
   <div class="alert alert-success">
-    There is a session of Carrot U starting on <%= @course_session.start_to_s %>. Fill out this form to apply.
+    There is a session of Carrot U starting on <%= @course_session.start_to_s %>.
+    <% if @student.pending? %>
+      <div class="alert alert-primary">
+        Your application is pending approval by
+        <% if @student.pending_manager_approval? %>
+          your manager (<%= current_user.manager.email %>)
+        <% else %>
+          the Carrot U team.
+        <% end %>
+      </div>
+    <% else %>
+      Fill out this form to apply.
+      <%= render 'application', student: current_user %>
+    <% end %>
   </div>
-  [Application form goes here.]
 <% elsif @waiting_list %>
   <div class="alert alert-success">
     <p>

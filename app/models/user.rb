@@ -2,6 +2,8 @@
 require "digest"
 
 class User < ApplicationRecord
+  has_many :users_managers
+
   before_save :compute_name_from_email
 
   # compute the name from the email if it is not already present
@@ -19,6 +21,10 @@ class User < ApplicationRecord
 
   def created_date_local
     self.created_at.localtime.strftime('%m-%d-%y')
+  end
+
+  def manager
+    self.users_managers.current.first&.manager
   end
 
   # meh, it's not great but its the best we can do until we separate the name attribute
