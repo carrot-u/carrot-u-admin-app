@@ -11,7 +11,7 @@
 
 <div class="container mx-auto">
   <p id="notice"><%= notice %></p>
-  <% @course_session.lectures.sort_by{|e| [e[:schedule_date] ? 0 : 1,e[:schedule_date]]}.each do |lecture| %>
+  <% @course_session.lectures.order('schedule_date ASC').each do |lecture| %> 
     <div class="card bg-white mb-3" style="max-width: 100rem;">
       <div class="card-header">
         <%= lecture.lecture_name %>
