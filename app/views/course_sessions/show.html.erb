@@ -14,8 +14,8 @@
   <% @course_session.lectures.order('schedule_date ASC').each do |lecture| %>
     <div class="card mb-3" style="max-width: 100rem;">
       <div class="row no-gutters">
-        <div class="col-md-2 bg-secondary text-center d-flex flex-column justify-content-center">
-          <%= fa_icon (lecture.topic_icon + " 4x"), class: "bg-transparent mx-auto my-2" if lecture.topic? %>
+        <div class="col-md-2 bg-secondary text-center d-flex flex-column justify-content-center text-light">
+          <%= fa_icon (lecture.topic_icon + " 4x"), class: "mx-auto my-2 text-light" if lecture.topic? %>
           <h5><%= lecture.topic if lecture.topic? %></h5>
         </div>
         <div class="col-md-10">

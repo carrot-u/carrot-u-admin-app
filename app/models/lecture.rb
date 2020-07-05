@@ -29,9 +29,9 @@ class Lecture < ApplicationRecord
     elsif self.topic == 'html'
       return "html5"
     elsif self.topic == 'javascript'
-      return "jsfiddle"
+      return "js"
     elsif self.topic == 'react'
-      return "chrome"
+      return "react"
     elsif self.topic == 'sql'
       return "database"
     elsif self.topic == 'other'
