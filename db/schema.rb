@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_05_183559) do
+ActiveRecord::Schema.define(version: 2020_07_05_220504) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 2020_07_05_183559) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "repository_link"
     t.bigint "lectures_id"
-    t.integer "status"
+    t.integer "status", default: 0, null: false
     t.index ["lectures_id"], name: "index_course_sessions_on_lectures_id"
   end
 
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 2020_07_05_183559) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "course_session_id"
     t.datetime "schedule_date"
+    t.integer "topic", default: 0, null: false
     t.index ["course_session_id"], name: "index_lectures_on_course_session_id"
     t.index ["homework_id"], name: "index_lectures_on_homework_id"
     t.index ["teacher_id"], name: "index_lectures_on_teacher_id"
