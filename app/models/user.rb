@@ -29,10 +29,10 @@ class User < ApplicationRecord
 
   # meh, it's not great but its the best we can do until we separate the name attribute
   def first_name
-    name.split.first
+    name&.split&.first
   end
 
   def last_name
-    name.split.last
+    name&.split&.last
   end
 end
