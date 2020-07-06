@@ -15,7 +15,7 @@
     <div class="card mb-3" style="max-width: 100rem;">
       <div class="row no-gutters">
         <div class="col-md-2 bg-secondary text-center d-flex flex-column justify-content-center text-light">
-          <%= fa_icon (lecture.topic_icon + " 4x"), class: "mx-auto my-2 text-light" if lecture.topic? %>
+          <%= fa_icon (lecture.lecture_avatar + " 4x"), class: "mx-auto my-2 text-light" if lecture.topic? %>
           <h5><%= lecture&.topic %></h5>
         </div>
         <div class="col-md-10">

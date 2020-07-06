@@ -5,10 +5,20 @@ class Lecture < ApplicationRecord
 
   enum topic: [:ruby, :rails, :javascript, :react, :html, :sql, :other]
 
+  @@topic_avatars = {
+    ruby: "diamond",
+    rails: "diamond",
+    html: "html5",
+    javascript: "js",
+    react: "react",
+    sql: "database",
+    other: "code"
+  }
+
 
   # better presentation of lecture datetime in user local time
   def scheduled_for_local
-    self.schedule_date.localtime.strftime("%Y/%m/%d at %I:%M%p")
+    self.schedule_date.localtime&.strftime("%Y/%m/%d at %I:%M%p")
   end
 
   def has_homework?
@@ -21,21 +31,7 @@ class Lecture < ApplicationRecord
     end
   end
 
-  def topic_icon
-    if self.topic == 'ruby'
-      return "diamond"
-    elsif self.topic == 'rails'
-      return "diamond"
-    elsif self.topic == 'html'
-      return "html5"
-    elsif self.topic == 'javascript'
-      return "js"
-    elsif self.topic == 'react'
-      return "react"
-    elsif self.topic == 'sql'
-      return "database"
-    elsif self.topic == 'other'
-      return "code"
-    end
+  def lecture_avatar
+    @@topic_avatars[self.topic.to_sym]
   end
 end
