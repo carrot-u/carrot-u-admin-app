@@ -1,9 +1,19 @@
-<div class="alert alert-error">
-  <%= @notice %>
-</div>
+<% if flash.notice %>
+  <div class="alert alert-error">
+    <%= flash.notice %>
+  </div>
+<% end %>
 <% if @course_session %>
   <div class="alert alert-success">
-    There is a session of Carrot U starting on <%= @course_session.start_to_s %>.
+    <p>
+      There is a session of Carrot U starting on <%= @course_session.start_to_s %>.
+    </p>
+    <% if !@student.pending? %>
+      <p>
+        Fill out this form to apply.
+      </p>
+    <% end %>
+  </div>
     <% if @student.pending? %>
       <div class="alert alert-primary">
         Your application is pending approval by
@@ -14,7 +24,6 @@
         <% end %>
       </div>
     <% else %>
-      Fill out this form to apply.
       <%= render 'application', student: current_user %>
     <% end %>
   </div>

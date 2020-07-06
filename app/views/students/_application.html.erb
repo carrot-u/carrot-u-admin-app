@@ -1,17 +1,98 @@
 <%= form_with url: students_application_path do  |form| %>
-  <div class="card p-5" style="width: 48rem;">
-    <div class="form-group">
-      <%= form.label :manager_email, class: "input-group mb-3" %>
-      <%= form.text_field :manager_email, class: "form-control" %>
-      <div class="text-warning">
-        Your manager must approve your application before you will be considered for the course.
+  <div class="card w-75">
+    <h4 class="card-title">Basic information</h4>
+    <div class="card-body">
+      <div class="form-group">
+        <%= form.label :manager_email, class: "input-group mb-3" %>
+        <%= form.text_field :manager_email, class: "form-control", placeholder: "manager.name@instacart.com",
+                            value: @manager_email, required: true %>
+        <div class="text-warning">
+          Your manager must approve your application before you will be considered for the course.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :department, class: "input-group mb-3" %>
+        <%= form.text_field :department, class: "form-control",
+                            value: answer_value("department"), required: true %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :start_date, class: "input-group mb-3" %>
+        <%= form.text_field :start_date, class: "form-control", placeholder: "YYYY-MM-DD",
+                            value: answer_value("start_date"), required: true %>
+        <div class="text-warning">
+          Your start date at Instacart. You must have been at Instacart for at least six months to be eligible.
+        </div>
       </div>
     </div>
+  </div>
 
-    <!-- TODO @muffy - put application questions here -->
-
-    <div class="actions">
-      <%= form.submit class: "btn btn-primary" %>
+  <div class="card w-75">
+    <h4 class="card-title">Code Challenge</h4>
+    <div class="card-body">
+      <div class="form-group">
+        <p>
+          This quick coding challenge will test your understanding of basic Ruby programming. If you're new to programming,
+          don't be deterred. Take as long as you need and feel free to look up anything that you may not know.
+        </p>
+        <p>
+          Write a method in Ruby that takes in a number as a parameter and prints "This number is even" if the number
+          is even or "This number is odd" if the number is odd.
+        </p>
+        <%= form.text_area :code_sample, class: "form-control", rows: 5,
+                           value: answer_value("code_sample", default_code_sample),
+                           required: true %>
+      </div>
     </div>
+  </div>
+
+  <div class="card w-75">
+    <h4 class="card-title">Project Proposal</h4>
+    <div class="card-body">
+      <div class="form-group">
+        <p>
+          An important component of the program will be working on building a final web-based project.
+          You will collaborate with others in the program on a project selected by your group during the program, but it
+          is also useful to have a project of your own in mind which you can use to apply what you are learning as you go.
+        </p>
+        <p>
+          Your project proposal should outline the problem you are trying to solve and who the audience/customer is.
+          It should include notes about the challenges you might have to solve to get it done.
+        </p>
+        <p>
+          Your project should be web-based and does not have to pertain to Instacart.
+          If you are accepted, we will help you refine your project before you actually build it,
+          we would just like to see you outline and articulate a project that you are inspired to work on.
+        </p>
+        <%= form.text_area :project, class: "form-control", placeholder: "Describe your project here.", rows: 5,
+                           value: answer_value("project"), required: true %>
+      </div>
+    </div>
+  </div>
+
+  <div class="card w-75">
+    <h4 class="card-title">You and Carrot U</h4>
+    <div class="card-body">
+      <div class="form-group">
+        <p>
+          Why are you interested in this program? How do you plan to apply these skills?
+        </p>
+        <%= form.text_area :why_carrot_u, class: "form-control", rows: 3,
+                           value: answer_value("why_carrot_u"), required: true %>
+      </div>
+      <div class="form-group">
+        <p>
+          What are you planning to do after completing the program?
+        </p>
+        <%= form.select :goal, goal_options, class: "form-control",
+                        selected: answer_value("goal"), required: true %>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: "btn btn-primary" %>
+  </div>
 <% end %>
 </div>
