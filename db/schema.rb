@@ -65,8 +65,8 @@ ActiveRecord::Schema.define(version: 2020_07_06_031058) do
     t.boolean "is_public"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_homework_submissions_on_course_session_user_id"
     t.index ["homework_id"], name: "index_homework_submissions_on_homework_id"
+    t.index ["user_id"], name: "index_homework_submissions_on_user_id"
   end
 
   create_table "homeworks", force: :cascade do |t|
@@ -163,8 +163,8 @@ ActiveRecord::Schema.define(version: 2020_07_06_031058) do
   add_foreign_key "course_session_participants", "course_sessions"
   add_foreign_key "course_session_participants", "users"
   add_foreign_key "course_sessions", "lectures", column: "lectures_id"
-  add_foreign_key "homework_submissions", "users"
   add_foreign_key "homework_submissions", "homeworks"
+  add_foreign_key "homework_submissions", "users"
   add_foreign_key "lectures", "course_sessions"
   add_foreign_key "users_managers", "users"
   add_foreign_key "users_managers", "users", column: "manager_id"
