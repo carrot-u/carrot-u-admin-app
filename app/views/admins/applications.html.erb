@@ -1,0 +1,41 @@
+<% @applications.each do |application| %>
+  <div class="card border-primary m-5">
+    <h5 class="card-header">Applicant: <%= application.user.name %></h5>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-6">
+          <p class="card-text">
+            Manager: <%= application.user.manager.email %>
+            <br/>
+            Approval: <%= application.manager_approved_at || "Pending" %>
+          </p>
+        </div>
+        <div class="col-sm-6 text-right">
+          <p class="card-text">
+            Application date: <%= application.created_at %>
+          </p>
+        </div>
+      </div>
+      <% application.application_answers.each do |answer| %>
+        <div class="card border-light">
+          <h6 class="card-header">
+            <%= student_application_question(answer.question_key) %>
+          </h6>
+          <div class="card-body">
+            <pre><%= answer.answer %></pre>
+          </div>
+        </div>
+      <% end %>
+      </div>
+      <div class="card-footer">
+        <div class="row">
+          <div class="col-sm-6">
+            <a href="#" class="btn btn-success">Approve application</a>
+          </div>
+          <div class="col-sm-6">
+            <a href="#" class="btn btn-danger">Deny application</a>
+          </div>
+        </div>
+      </div>
+    </div>
+<% end %>

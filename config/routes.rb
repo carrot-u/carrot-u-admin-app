@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   resources :homeworks
   resources :mentors
   resources :application_questions
-  resources :admins
 
   get "/help/:page", to: "help#show"
 
@@ -39,4 +38,9 @@ Rails.application.routes.draw do
   post "students/waitlist"
   get "students/waiting_list"
   post "students/application"
+
+  #
+  # Admin special actions
+  #
+  get "admins/applications"
 end
