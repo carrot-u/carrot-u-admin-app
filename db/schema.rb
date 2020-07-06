@@ -10,27 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_03_220508) do
+ActiveRecord::Schema.define(version: 2020_07_05_185559) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "application_answers", force: :cascade do |t|
-    t.bigint "application_question_id", null: false
+    t.bigint "question_key", null: false
     t.bigint "user_id", null: false
     t.text "answer"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["application_question_id"], name: "index_application_answers_on_application_question_id"
+    t.index ["question_key"], name: "index_application_answers_on_question_key"
     t.index ["user_id"], name: "index_application_answers_on_user_id"
-  end
-
-  create_table "application_questions", force: :cascade do |t|
-    t.text "text"
-    t.string "role"
-    t.boolean "current"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "authorizations", force: :cascade do |t|
@@ -178,7 +170,6 @@ ActiveRecord::Schema.define(version: 2020_07_03_220508) do
     t.index ["user_id"], name: "index_waiting_lists_on_user_id"
   end
 
-  add_foreign_key "application_answers", "application_questions"
   add_foreign_key "application_answers", "users"
   add_foreign_key "course_session_participants", "course_sessions"
   add_foreign_key "course_session_participants", "users"

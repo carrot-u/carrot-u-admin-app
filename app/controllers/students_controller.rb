@@ -1,16 +1,9 @@
 class StudentsController < ApplicationController
   before_action :set_open_course_session, only: [:apply, :application]
   before_action :set_student, only: [:application]
+  before_action :set_answers, only: [:apply, :application]
 
-=begin
-  private
-    # Use callbacks to share common setup or constraints between actions.
-
-    # Only allow a list of trusted parameters through.
-    def student_params
-      params.require(:student).permit(:user_id)
-    end
-=end
+  APPLICATION_QUESTIONS = [:department, :start_date, :code_sample, :project, :why_carrot_u, :goal]
 
   # GET /students/apply
   # Allow a student to apply for the upcoming course session, if there is one
@@ -32,7 +25,19 @@ class StudentsController < ApplicationController
     UsersManager.current.find_or_create_by(user: current_user, manager: manager)
 
     @student.save!
-    # TODO @muffy - save application answers
+
+    @answers.each do |answer|
+      answer.text = params[answer.question_key]
+      answer.save!
+    end
+
+    if @answers.any?(&:text.blank?)
+      @notice = "Please answer all of the questions"
+    else
+      @student.application_complete = true
+      @student.save!
+    end
+
     render :apply
   end
 
@@ -64,7 +69,7 @@ class StudentsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def application_params
-    params.permit(:manager_email)
+    params.permit([:manager_email] + APPLICATION_QUESTIONS)
   end
 
   def set_open_course_session
@@ -73,5 +78,11 @@ class StudentsController < ApplicationController
 
   def set_student
     @student = CourseSessionParticipant.student.find_or_initialize_by(user: current_user, course_session: @course_session)
+  end
+
+  def set_answers
+    @answers = APPLICATION_QUESTIONS.each do |question|
+      ApplicationAnswer.find_or_initialize_by(course_session_participant: @student, question_key: question)
+    end
   end
 end
