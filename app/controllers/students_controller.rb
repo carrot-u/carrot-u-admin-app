@@ -3,7 +3,6 @@ class StudentsController < ApplicationController
   before_action :set_student, only: [:apply, :application]
   before_action :set_answers, only: [:apply, :application]
 
-  APPLICATION_QUESTIONS = [:department, :start_date, :code_sample, :project, :why_carrot_u, :goal]
   DEFAULT_CODE_SAMPLE = "def even_or_odd(number)\n  # fill in code here\nend"
 
   # GET /students/apply
@@ -40,7 +39,6 @@ class StudentsController < ApplicationController
       @student.save!
     end
 
-    puts "******notice: #{flash.notice}"
     redirect_to action: "apply", notice: flash.notice
   end
 
@@ -86,7 +84,11 @@ class StudentsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def application_params
-    params.permit([:manager_email] + APPLICATION_QUESTIONS)
+    params.permit([:manager_email] + application_questions)
+  end
+
+  def application_questions
+    ApplicationAnswer::STUDENT_APPLICATION_QUESTIONS.keys
   end
 
   def set_open_course_session
@@ -98,7 +100,7 @@ class StudentsController < ApplicationController
   end
 
   def set_answers
-    @answers = APPLICATION_QUESTIONS.map do |question|
+    @answers = application_questions.map do |question|
       answer = ApplicationAnswer.find_or_initialize_by(question_key: question, course_session_participant_id: @student.id)
       if application_params[question].present?
         answer.answer = application_params[question]

@@ -1,6 +1,7 @@
 class CourseSessionParticipant < ApplicationRecord
   belongs_to :user
   belongs_to :course_session
+  has_many :application_answers
   has_many :homework_submissions
 
   module Roles
