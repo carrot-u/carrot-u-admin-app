@@ -16,7 +16,7 @@
       <div class="row no-gutters">
         <div class="col-md-2 bg-secondary text-center d-flex flex-column justify-content-center text-light">
           <%= fa_icon (lecture.topic_icon + " 4x"), class: "mx-auto my-2 text-light" if lecture.topic? %>
-          <h5><%= lecture.topic if lecture.topic? %></h5>
+          <h5><%= lecture&.topic %></h5>
         </div>
         <div class="col-md-10">
           <div class="card-body">
@@ -29,13 +29,15 @@
             </h5>
             <p class="card-text"><%= lecture.lecture_content %></p>
             <p class="text-left"></p>
-            <%= link_to "View Lecture", lecture.video_link, class: "float-left" if lecture.video_link != '' %>
             <% if lecture.has_homework? %>
               <%= link_to lecture.homework.content, homework_path(lecture.homework), class: "float-right" %>
             <% else %>
               <%= link_to 'Add Homework', new_homework_path(lecture.id), class: "float-right" if @current_user.admin %>
             <% end %>
-            <p class="card-text"><small class="text-muted"><%= "Lecture Date: " + lecture.scheduled_for_local if lecture.schedule_date %></small></p>
+            <p class="card-text">
+              <small class="text-muted"><%= "Lecture Date: " + lecture.scheduled_for_local if lecture.schedule_date? %></small>
+              <%= link_to "View Lecture", lecture&.video_link, class: "pr-2" if lecture.video_link? %>
+            </p>
           </div>
         </div>
       </div>

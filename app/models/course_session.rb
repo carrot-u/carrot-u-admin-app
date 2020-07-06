@@ -8,12 +8,20 @@ class CourseSession < ApplicationRecord
 
   enum status: [:draft, :admissions, :active, :finished, :archived]
 
+  @@badges = {
+    draft: "light",
+    admissions: "primary",
+    active: "success",
+    finished: "warning",
+    archived: "secondary"
+  }
+
   #
   # Class methods
   #
   class << self
     def accepting_applications
-      CourseSession.where("start_date > ?", Time.now).
+      CourseSession.where("status = ?",statuses["admissions"]).
         order("start_date ASC")
     end
   end
@@ -22,7 +30,7 @@ class CourseSession < ApplicationRecord
   # Instance methods
   #
   def start_to_s
-    return self.start_date.strftime('%m-%d-%y') if self.start_date
+    return self.start_date&.strftime('%m-%d-%y')
   end
 
   def destroy_lectures
@@ -30,17 +38,6 @@ class CourseSession < ApplicationRecord
   end
 
   def status_badge
-    class_tag = 'badge badge-pill badge-'
-    if self.status == 'draft'
-      return class_tag + 'light'
-    elsif self.status == 'admissions'
-      return class_tag + 'primary'
-    elsif self.status == 'active'
-      return class_tag + 'success'
-    elsif self.status == 'finished'
-      return class_tag + 'warning'
-    elsif self.status == 'archived'
-      return class_tag + 'secondary'
-    end
+    "badge badge-pill badge-#{@@badges[self.status.to_sym]}"
   end
 end
