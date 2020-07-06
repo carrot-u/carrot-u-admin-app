@@ -1,16 +1,10 @@
 class StudentsController < ApplicationController
   before_action :set_open_course_session, only: [:apply, :application]
-  before_action :set_student, only: [:application]
+  before_action :set_student, only: [:apply, :application]
+  before_action :set_answers, only: [:apply, :application]
 
-=begin
-  private
-    # Use callbacks to share common setup or constraints between actions.
-
-    # Only allow a list of trusted parameters through.
-    def student_params
-      params.require(:student).permit(:user_id)
-    end
-=end
+  APPLICATION_QUESTIONS = [:department, :start_date, :code_sample, :project, :why_carrot_u, :goal]
+  DEFAULT_CODE_SAMPLE = "def even_or_odd(number)\n  # fill in code here\nend"
 
   # GET /students/apply
   # Allow a student to apply for the upcoming course session, if there is one
@@ -19,6 +13,7 @@ class StudentsController < ApplicationController
       @waiting_list = WaitingList.current.where(user: current_user).first
     else
       set_student
+      @manager_email = UsersManager.current.find_or_initialize_by(user: current_user).manager&.email
     end
 
     render :apply
@@ -28,12 +23,38 @@ class StudentsController < ApplicationController
   # Save the manager info and application answers for a student
   def application
     # Record the manager email
+    # TODO @muffy - email manager requesting approval
     manager = User.find_or_create_by(email: application_params[:manager_email])
     UsersManager.current.find_or_create_by(user: current_user, manager: manager)
 
+    @student.application_complete = false
     @student.save!
-    # TODO @muffy - save application answers
-    render :apply
+
+    @answers.each do |answer|
+      answer.answer = params[answer.question_key]
+      answer.save!
+    end
+
+    if validate_answers
+      @student.application_complete = true
+      @student.save!
+    end
+
+    redirect_to action: "apply", notice: flash.notice
+  end
+
+  def validate_answers
+    if @answers.any? { |a| a.answer.blank? }
+      flash.notice = "Please answer all of the questions"
+      return false
+    end
+
+    if application_params[:code_sample] == DEFAULT_CODE_SAMPLE
+      flash.notice = "Please enter your code sample"
+      return false
+    end
+
+    true
   end
 
   # POST /students/waitlist
@@ -43,10 +64,10 @@ class StudentsController < ApplicationController
     @waiting_list = WaitingList.find_or_create_by(user: current_user, course_session: nil)
 
     if @waiting_list.new_record? && !@waiting_list.save!
-      @notice = "There was an error adding you to the waiting list, please try again later."
+      flash.notice = "There was an error adding you to the waiting list, please try again later."
     end
 
-    render :apply
+    redirect_to action: "apply"
   end
 
   # GET /students/waiting_list
@@ -56,7 +77,7 @@ class StudentsController < ApplicationController
       @waiting_list = WaitingList.current
     else
       @waiting_list = []
-      @notice = "You must be an admin to view the waiting list."
+      flash.notice = "You must be an admin to view the waiting list."
     end
   end
 
@@ -64,7 +85,7 @@ class StudentsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def application_params
-    params.permit(:manager_email)
+    params.permit([:manager_email] + APPLICATION_QUESTIONS)
   end
 
   def set_open_course_session
@@ -73,5 +94,15 @@ class StudentsController < ApplicationController
 
   def set_student
     @student = CourseSessionParticipant.student.find_or_initialize_by(user: current_user, course_session: @course_session)
+  end
+
+  def set_answers
+    @answers = APPLICATION_QUESTIONS.map do |question|
+      answer = ApplicationAnswer.find_or_initialize_by(question_key: question, course_session_participant_id: @student.id)
+      if application_params[question].present?
+        answer.answer = application_params[question]
+      end
+      answer
+    end
   end
 end

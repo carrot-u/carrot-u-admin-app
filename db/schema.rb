@@ -10,27 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_03_220508) do
+ActiveRecord::Schema.define(version: 2020_07_06_031058) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "application_answers", force: :cascade do |t|
-    t.bigint "application_question_id", null: false
-    t.bigint "user_id", null: false
+    t.string "question_key", null: false
     t.text "answer"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["application_question_id"], name: "index_application_answers_on_application_question_id"
-    t.index ["user_id"], name: "index_application_answers_on_user_id"
-  end
-
-  create_table "application_questions", force: :cascade do |t|
-    t.text "text"
-    t.string "role"
-    t.boolean "current"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "course_session_participant_id"
+    t.index ["course_session_participant_id"], name: "index_application_answers_on_course_session_participant_id"
+    t.index ["question_key"], name: "index_application_answers_on_question_key"
   end
 
   create_table "authorizations", force: :cascade do |t|
@@ -49,6 +41,7 @@ ActiveRecord::Schema.define(version: 2020_07_03_220508) do
     t.string "role", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "application_complete"
     t.index ["course_session_id"], name: "index_course_session_participants_on_course_session_id"
     t.index ["user_id"], name: "index_course_session_participants_on_user_id"
   end
@@ -123,18 +116,6 @@ ActiveRecord::Schema.define(version: 2020_07_03_220508) do
     t.index ["updated_at"], name: "index_sessions_on_updated_at"
   end
 
-  create_table "students", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "email"
-    t.boolean "is_active"
-    t.boolean "is_approved"
-    t.bigint "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_students_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -178,8 +159,7 @@ ActiveRecord::Schema.define(version: 2020_07_03_220508) do
     t.index ["user_id"], name: "index_waiting_lists_on_user_id"
   end
 
-  add_foreign_key "application_answers", "application_questions"
-  add_foreign_key "application_answers", "users"
+  add_foreign_key "application_answers", "course_session_participants"
   add_foreign_key "course_session_participants", "course_sessions"
   add_foreign_key "course_session_participants", "users"
   add_foreign_key "course_sessions", "lectures", column: "lectures_id"

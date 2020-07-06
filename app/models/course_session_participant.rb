@@ -13,7 +13,7 @@ class CourseSessionParticipant < ApplicationRecord
   scope :student, -> { where(role: Roles::STUDENT) }
 
   def pending?
-    !self.new_record? && (pending_manager_approval? || pending_acceptance?)
+    !self.new_record? && self.application_complete && (pending_manager_approval? || pending_acceptance?)
   end
 
   def pending_manager_approval?
