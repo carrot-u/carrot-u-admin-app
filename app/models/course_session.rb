@@ -30,7 +30,13 @@ class CourseSession < ApplicationRecord
   # Instance methods
   #
   def start_to_s
-    return self.start_date&.strftime('%m-%d-%y')
+    if !self.start_date?
+      "Session start date has not been scheduled."
+    elsif self.start_date > Time.now
+      "Starts " +  self.start_date&.strftime('%m-%d-%Y') if self.start_date?
+    else
+      "Started " +  self.start_date&.strftime('%m-%d-%Y') if self.start_date?
+    end
   end
 
   def destroy_lectures
