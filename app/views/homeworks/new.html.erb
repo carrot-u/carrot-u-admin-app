@@ -1,5 +1,7 @@
 <h1>New Homework</h1>
 
-<%= render 'form', homework: @homework %>
+<div class="container d-flex justify-content-center">
+    <%= render 'form', homework: @homework %>
+</div>
 
 <%= link_to 'Back', course_session_path(@homework.get_course_session_id) %>

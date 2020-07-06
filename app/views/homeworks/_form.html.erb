@@ -15,22 +15,24 @@
     <%= form.hidden_field :lecture_id, value: params[:format] %>
   </div>
   
-  <div class="field">
-    <%= form.label :content %>
-    <%= form.text_field :content %>
-  </div>
+<div class="card p-5" style="width: 48rem;">
+    <div class="form-group">
+      <%= form.label :content, class: "input-group mb-3" %>
+      <%= form.text_field :content, class: "form-control" %>
+    </div>
+    
+    <div class="form-group">
+      <%= form.label :status, class: "input-group mb-3" %>
+      <%= form.text_field :status, class: "form-control" %>
+    </div>
 
-  <div class="field">
-    <%= form.label :status %>
-    <%= form.text_field :status %>
-  </div>
+    <div class="form-group">
+      <%= form.label :due_date, class: "input-group mb-3" %>
+      <%= form.date_field :due_date, class: "form-control" %>
+    </div>
 
-  <div class="field">
-    <%= form.label :due_date %>
-    <%= form.date_field :due_date %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+    <div class="actions">
+      <%= form.submit class: "btn btn-primary"%>
+    </div>
+  <% end %>
+</div>
