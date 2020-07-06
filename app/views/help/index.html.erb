@@ -168,7 +168,7 @@ including none, the skills needed to be a full-stack engineer.
 </p>
 <% faqs.each do |section| %>
   <a name="<%= section[:name] %>" href="#"></a>
-  <h2><%= section[:title] %></h2>
+  <h2 class="mt-5"><%= section[:title] %></h2>
   <div class="accordion" id="faq">
     <% section[:content].each_with_index do |faq, index| %>
       <div class="card">
