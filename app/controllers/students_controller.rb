@@ -4,6 +4,7 @@ class StudentsController < ApplicationController
   before_action :set_answers, only: [:apply, :application]
 
   APPLICATION_QUESTIONS = [:department, :start_date, :code_sample, :project, :why_carrot_u, :goal]
+  DEFAULT_CODE_SAMPLE = "def even_or_odd(number)\n  # fill in code here\nend"
 
   # GET /students/apply
   # Allow a student to apply for the upcoming course session, if there is one
@@ -34,14 +35,27 @@ class StudentsController < ApplicationController
       answer.save!
     end
 
-    if @answers.any? { |a| a.answer.blank? }
-      @notice = "Please answer all of the questions"
-    else
+    if validate_answers
       @student.application_complete = true
       @student.save!
     end
 
-    redirect_to action: "apply"
+    puts "******notice: #{flash.notice}"
+    redirect_to action: "apply", notice: flash.notice
+  end
+
+  def validate_answers
+    if @answers.any? { |a| a.answer.blank? }
+      flash.notice = "Please answer all of the questions"
+      return false
+    end
+
+    if application_params[:code_sample] == DEFAULT_CODE_SAMPLE
+      flash.notice = "Please enter your code sample"
+      return false
+    end
+
+    true
   end
 
   # POST /students/waitlist
@@ -51,7 +65,7 @@ class StudentsController < ApplicationController
     @waiting_list = WaitingList.find_or_create_by(user: current_user, course_session: nil)
 
     if @waiting_list.new_record? && !@waiting_list.save!
-      @notice = "There was an error adding you to the waiting list, please try again later."
+      flash.notice = "There was an error adding you to the waiting list, please try again later."
     end
 
     redirect_to action: "apply"
@@ -64,7 +78,7 @@ class StudentsController < ApplicationController
       @waiting_list = WaitingList.current
     else
       @waiting_list = []
-      @notice = "You must be an admin to view the waiting list."
+      flash.notice = "You must be an admin to view the waiting list."
     end
   end
 

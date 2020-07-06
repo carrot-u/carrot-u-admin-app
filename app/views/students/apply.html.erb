@@ -1,6 +1,8 @@
-<div class="alert alert-error">
-  <%= @notice %>
-</div>
+<% if flash.notice %>
+  <div class="alert alert-error">
+    <%= flash.notice %>
+  </div>
+<% end %>
 <% if @course_session %>
   <div class="alert alert-success">
     <p>

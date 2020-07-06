@@ -41,7 +41,7 @@
           is even or "This number is odd" if the number is odd.
         </p>
         <%= form.text_area :code_sample, class: "form-control", rows: 5,
-                           value: answer_value("code_sample", "def even_or_odd(number)\n  # fill in code here\nend"),
+                           value: answer_value("code_sample", default_code_sample),
                            required: true %>
       </div>
     </div>

@@ -3,6 +3,10 @@ module StudentsHelper
     @answers.find { |answer| answer.question_key == question_key }&.answer || default_value
   end
 
+  def default_code_sample
+    StudentsController::DEFAULT_CODE_SAMPLE
+  end
+
   def goal_options
     goals = [
       "-- Select a goal --",
