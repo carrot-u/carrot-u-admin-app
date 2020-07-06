@@ -4,7 +4,8 @@
     <div class="card-body">
       <div class="form-group">
         <%= form.label :manager_email, class: "input-group mb-3" %>
-        <%= form.text_field :manager_email, class: "form-control", placeholder: "manager.name@instacart.com", required: true %>
+        <%= form.text_field :manager_email, class: "form-control", placeholder: "manager.name@instacart.com",
+                            value: @manager_email, required: true %>
         <div class="text-warning">
           Your manager must approve your application before you will be considered for the course.
         </div>
@@ -12,12 +13,14 @@
 
       <div class="form-group">
         <%= form.label :department, class: "input-group mb-3" %>
-        <%= form.text_field :department, class: "form-control", required: true %>
+        <%= form.text_field :department, class: "form-control",
+                            value: answer_value("department"), required: true %>
       </div>
 
       <div class="form-group">
         <%= form.label :start_date, class: "input-group mb-3" %>
-        <%= form.text_field :start_date, class: "form-control", placeholder: "YYYY-MM-DD", required: true %>
+        <%= form.text_field :start_date, class: "form-control", placeholder: "YYYY-MM-DD",
+                            value: answer_value("start_date"), required: true %>
         <div class="text-warning">
           Your start date at Instacart. You must have been at Instacart for at least six months to be eligible.
         </div>
@@ -37,7 +40,9 @@
           Write a method in Ruby that takes in a number as a parameter and prints "This number is even" if the number
           is even or "This number is odd" if the number is odd.
         </p>
-        <%= form.text_area :code_sample, class: "form-control", value: "def even_or_odd\n  # fill in code here\nend", rows: 5, required: true %>
+        <%= form.text_area :code_sample, class: "form-control", rows: 5,
+                           value: answer_value("code_sample", "def even_or_odd(number)\n  # fill in code here\nend"),
+                           required: true %>
       </div>
     </div>
   </div>
@@ -60,7 +65,8 @@
           If you are accepted, we will help you refine your project before you actually build it,
           we would just like to see you outline and articulate a project that you are inspired to work on.
         </p>
-        <%= form.text_area :project, class: "form-control", placeholder: "Describe your project here.", rows: 5, required: true %>
+        <%= form.text_area :project, class: "form-control", placeholder: "Describe your project here.", rows: 5,
+                           value: answer_value("project"), required: true %>
       </div>
     </div>
   </div>
@@ -72,13 +78,15 @@
         <p>
           Why are you interested in this program? How do you plan to apply these skills?
         </p>
-        <%= form.text_area :why_carrot_u, class: "form-control", rows: 3, required: true %>
+        <%= form.text_area :why_carrot_u, class: "form-control", rows: 3,
+                           value: answer_value("why_carrot_u"), required: true %>
       </div>
       <div class="form-group">
         <p>
-          What are you looking to do after completing the program?
+          What are you planning to do after completing the program?
         </p>
-        <%= form.select :goal, goal_options, class: "form-control", required: true %>
+        <%= form.select :goal, goal_options, class: "form-control",
+                        selected: answer_value("goal"), required: true %>
       </div>
     </div>
   </div>

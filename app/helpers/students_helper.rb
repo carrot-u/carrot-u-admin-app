@@ -1,6 +1,6 @@
 module StudentsHelper
-  def answer_value(question_key)
-    @answers.find { |answer| answer.question_key == question_key }&.text
+  def answer_value(question_key, default_value=nil)
+    @answers.find { |answer| answer.question_key == question_key }&.answer || default_value
   end
 
   def goal_options

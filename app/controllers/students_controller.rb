@@ -1,6 +1,6 @@
 class StudentsController < ApplicationController
   before_action :set_open_course_session, only: [:apply, :application]
-  before_action :set_student, only: [:application]
+  before_action :set_student, only: [:apply, :application]
   before_action :set_answers, only: [:apply, :application]
 
   APPLICATION_QUESTIONS = [:department, :start_date, :code_sample, :project, :why_carrot_u, :goal]
@@ -12,6 +12,7 @@ class StudentsController < ApplicationController
       @waiting_list = WaitingList.current.where(user: current_user).first
     else
       set_student
+      @manager_email = UsersManager.current.find_or_initialize_by(user: current_user).manager&.email
     end
 
     render :apply
@@ -21,24 +22,26 @@ class StudentsController < ApplicationController
   # Save the manager info and application answers for a student
   def application
     # Record the manager email
+    # TODO @muffy - email manager requesting approval
     manager = User.find_or_create_by(email: application_params[:manager_email])
     UsersManager.current.find_or_create_by(user: current_user, manager: manager)
 
+    @student.application_complete = false
     @student.save!
 
     @answers.each do |answer|
-      answer.text = params[answer.question_key]
+      answer.answer = params[answer.question_key]
       answer.save!
     end
 
-    if @answers.any?(&:text.blank?)
+    if @answers.any? { |a| a.answer.blank? }
       @notice = "Please answer all of the questions"
     else
       @student.application_complete = true
       @student.save!
     end
 
-    render :apply
+    redirect_to action: "apply"
   end
 
   # POST /students/waitlist
@@ -51,7 +54,7 @@ class StudentsController < ApplicationController
       @notice = "There was an error adding you to the waiting list, please try again later."
     end
 
-    render :apply
+    redirect_to action: "apply"
   end
 
   # GET /students/waiting_list
@@ -81,8 +84,12 @@ class StudentsController < ApplicationController
   end
 
   def set_answers
-    @answers = APPLICATION_QUESTIONS.each do |question|
-      ApplicationAnswer.find_or_initialize_by(course_session_participant: @student, question_key: question)
+    @answers = APPLICATION_QUESTIONS.map do |question|
+      answer = ApplicationAnswer.find_or_initialize_by(question_key: question, course_session_participant_id: @student.id)
+      if application_params[question].present?
+        answer.answer = application_params[question]
+      end
+      answer
     end
   end
 end
