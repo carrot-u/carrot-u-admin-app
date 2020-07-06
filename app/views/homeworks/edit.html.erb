@@ -1,6 +1,10 @@
-<h1>Editing Homework</h1>
+<div class="container mb-auto py-3 text-center">
+  <h2>Editing Homework</h2>
+</div>
 
-<%= render 'form', homework: @homework %>
+<div class="container d-flex justify-content-center">
+    <%= render 'form', homework: @homework %>
+</div>
 
 <%= link_to 'Show', @homework %> |
 <%= link_to 'Back', homeworks_path %>
