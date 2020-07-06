@@ -40,7 +40,6 @@ class StudentsController < ApplicationController
       @student.save!
     end
 
-    puts "******notice: #{flash.notice}"
     redirect_to action: "apply", notice: flash.notice
   end
 
