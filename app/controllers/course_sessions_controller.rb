@@ -67,7 +67,9 @@ class CourseSessionsController < ApplicationController
 
       # Only allow a list of trusted parameters through.
       def course_session_params
-        params.require(:course_session).permit(:name, :description, :start_date, :end_date, :repository_link)
+         csp = params.require(:course_session).permit(:name, :description, :start_date, :end_date, :repository_link, :status)
+         csp[:status] = params[:course_session][:status].to_i
+         return csp
       end
 
       def destroy_lectures

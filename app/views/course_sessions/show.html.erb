@@ -11,26 +11,35 @@
 
 <div class="container mx-auto">
   <p id="notice"><%= notice %></p>
-  <% @course_session.lectures.sort_by{|e| [e[:schedule_date] ? 0 : 1,e[:schedule_date]]}.each do |lecture| %>
-    <div class="card bg-white mb-3" style="max-width: 100rem;">
-      <div class="card-header">
-        <%= lecture.lecture_name %>
-        <% if @current_user.admin %>
-          <%= link_to fa_icon("trash"), lecture, class: "float-right px-3", method: :delete, data: { confirm: 'Are you sure?' } %>
-          <%= link_to fa_icon("edit"), edit_lecture_path(lecture), class: "float-right" %>
-        <% end %>
-      </div>
-      <div class="card-title p-3">
-        <h5><%= lecture.lecture_content %></h5>
-      </div>
-      <div class="card-body px-3 py-1">
-        <p class="text-left"><%= "Lecture Date: " + lecture.scheduled_for_local if lecture.schedule_date %></p>
-        <%= link_to "View Lecture", lecture.video_link, class: "float-left" if lecture.video_link != '' %>
-        <% if lecture.has_homework? %>
-          <%= link_to lecture.homework.content, homework_path(lecture.homework), class: "float-right" %>
-        <% else %>
-          <%= link_to 'Add Homework', new_homework_path(lecture.id), class: "float-right" if @current_user.admin %>
-        <% end %>
+  <% @course_session.lectures.order('schedule_date ASC').each do |lecture| %>
+    <div class="card mb-3" style="max-width: 100rem;">
+      <div class="row no-gutters">
+        <div class="col-md-2 bg-secondary text-center d-flex flex-column justify-content-center text-light">
+          <%= fa_icon (lecture.lecture_avatar + " 4x"), class: "mx-auto my-2 text-light" if lecture.topic? %>
+          <h5><%= lecture&.topic %></h5>
+        </div>
+        <div class="col-md-10">
+          <div class="card-body">
+            <h5>
+              <%= lecture.lecture_name %>
+              <% if @current_user.admin %>
+                <%= link_to fa_icon("trash"), lecture, class: "float-right px-3", method: :delete, data: { confirm: 'Are you sure?' } %>
+                <%= link_to fa_icon("edit"), edit_lecture_path(lecture), class: "float-right" %>
+              <% end %>
+            </h5>
+            <p class="card-text"><%= lecture.lecture_content %></p>
+            <p class="text-left"></p>
+            <% if lecture.has_homework? %>
+              <%= link_to lecture.homework.content, homework_path(lecture.homework), class: "float-right" %>
+            <% else %>
+              <%= link_to 'Add Homework', new_homework_path(lecture.id), class: "float-right" if @current_user.admin %>
+            <% end %>
+            <p class="card-text">
+              <small class="text-muted"><%= "Lecture Date: " + lecture.scheduled_for_local if lecture.schedule_date? %></small>
+              <%= link_to "View Lecture", lecture&.video_link, class: "pr-2" if lecture.video_link? %>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   <% end %>

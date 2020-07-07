@@ -6,12 +6,22 @@ class CourseSession < ApplicationRecord
 
   scope :students, -> { joins(:course_session_participants).merge(CourseSessionParticipant.student) }
 
+  enum status: [:draft, :admissions, :active, :finished, :archived]
+
+  @@badges = {
+    draft: "light",
+    admissions: "primary",
+    active: "success",
+    finished: "warning",
+    archived: "secondary"
+  }
+
   #
   # Class methods
   #
   class << self
     def accepting_applications
-      CourseSession.where("start_date > ?", Time.now).
+      CourseSession.where("status = ?",statuses["admissions"]).
         order("start_date ASC")
     end
   end
@@ -20,10 +30,20 @@ class CourseSession < ApplicationRecord
   # Instance methods
   #
   def start_to_s
-    return self.start_date.strftime('%m-%d-%y')
+    if !self.start_date?
+      "Session start date has not been scheduled."
+    elsif self.start_date > Time.now
+      "Starts " +  self.start_date&.strftime('%m-%d-%Y') if self.start_date?
+    else
+      "Started " +  self.start_date&.strftime('%m-%d-%Y') if self.start_date?
+    end
   end
 
   def destroy_lectures
     self.lectures.destroy_all
+  end
+
+  def status_badge
+    "badge badge-pill badge-#{@@badges[self.status.to_sym]}"
   end
 end
