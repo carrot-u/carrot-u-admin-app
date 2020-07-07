@@ -2,32 +2,8 @@
 
 <h1>Homework Assignments</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Homework Content</th>
-      <th>Description</th>
-      <th>Status</th>
-      <th>Due Date</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<% @homeworks.each do |homework| %>
+  <%= render "homework_card", homework: homework %>
+<% end %>
 
-  <tbody>
-    <% @homeworks.each do |homework| %>
-      <tr>
-        <td><%= homework.content %></td>
-        <td><%= homework.description %></td>
-        <td><%= homework.status %></td>
-        <td><%= homework.due_date_to_s %></td> 
-        <td><%= link_to 'Show', homework %></td>
-        <td><%= link_to 'Edit', edit_homework_path(homework) %></td>
-        <td><%= link_to 'Destroy', homework, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'Back', course_sessions_path %>
+<%= link_to 'Course Session', course_sessions_path %>

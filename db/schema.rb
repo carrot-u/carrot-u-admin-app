@@ -46,19 +46,6 @@ ActiveRecord::Schema.define(version: 2020_07_07_064558) do
     t.index ["user_id"], name: "index_course_session_participants_on_user_id"
   end
 
-  create_table "course_session_users", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "course_session_id"
-    t.string "role"
-    t.boolean "notification_sent"
-    t.datetime "manager_approved_at"
-    t.datetime "accepted_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["course_session_id"], name: "index_course_session_users_on_course_session_id"
-    t.index ["user_id"], name: "index_course_session_users_on_user_id"
-  end
-
   create_table "course_sessions", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -73,14 +60,15 @@ ActiveRecord::Schema.define(version: 2020_07_07_064558) do
   end
 
   create_table "homework_submissions", force: :cascade do |t|
+    t.bigint "user_id", null: false
     t.bigint "homework_id", null: false
     t.string "pull_request"
     t.boolean "is_public"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "course_session_participant"
     t.bigint "course_session_participant_id"
     t.index ["homework_id"], name: "index_homework_submissions_on_homework_id"
+    t.index ["user_id"], name: "index_homework_submissions_on_user_id"
   end
 
   create_table "homeworks", force: :cascade do |t|
@@ -180,6 +168,7 @@ ActiveRecord::Schema.define(version: 2020_07_07_064558) do
   add_foreign_key "course_session_participants", "users"
   add_foreign_key "course_sessions", "lectures", column: "lectures_id"
   add_foreign_key "homework_submissions", "homeworks"
+  add_foreign_key "homework_submissions", "users"
   add_foreign_key "lectures", "course_sessions"
   add_foreign_key "users_managers", "users"
   add_foreign_key "users_managers", "users", column: "manager_id"
