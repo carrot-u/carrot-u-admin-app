@@ -40,6 +40,7 @@ Rails.application.routes.draw do
   post "students/waitlist"
   get "students/waiting_list"
   post "students/application"
+  put "students/approve_application/:id", to: 'admins#approve_student_application', as: 'approve_student_application'
 
   #
   # Admin special actions

@@ -13,4 +13,10 @@ class AdminsController < ApplicationController
     render "applications"
   end
 
+  def approve_student_application
+    @student_application = CourseSessionParticipant.find(params[:id])
+    @student_application.update_columns(manager_approved_at: Time.now, accepted_at: Time.now)
+    redirect_to admins_applications_url
+  end
+
 end
