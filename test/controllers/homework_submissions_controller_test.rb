@@ -17,7 +17,7 @@ class HomeworkSubmissionsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create homework_submission" do
     assert_difference('HomeworkSubmission.count') do
-      post homework_submissions_url, params: { homework_submission: { course_session_user_id: @homework_submission.course_session_user_id, homework_id: @homework_submission.homework_id, is_public: @homework_submission.is_public, pull_request: @homework_submission.pull_request } }
+      post homework_submissions_url, params: { homework_submission: { course_session_participant_id: @homework_submission.course_session_participant_id, homework_id: @homework_submission.homework_id, is_public: @homework_submission.is_public, pull_request: @homework_submission.pull_request } }
     end
 
     assert_redirected_to homework_submission_url(HomeworkSubmission.last)
@@ -34,7 +34,7 @@ class HomeworkSubmissionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update homework_submission" do
-    patch homework_submission_url(@homework_submission), params: { homework_submission: { course_session_user_id: @homework_submission.course_session_user_id, homework_id: @homework_submission.homework_id, is_public: @homework_submission.is_public, pull_request: @homework_submission.pull_request } }
+    patch homework_submission_url(@homework_submission), params: { homework_submission: { course_session_participant_id: @homework_submission.course_session_participant_id, homework_id: @homework_submission.homework_id, is_public: @homework_submission.is_public, pull_request: @homework_submission.pull_request } }
     assert_redirected_to homework_submission_url(@homework_submission)
   end
 

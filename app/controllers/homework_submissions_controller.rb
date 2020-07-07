@@ -1,8 +1,7 @@
 class HomeworkSubmissionsController < ApplicationController
-  before_action :set_homework_submission, only: [:show, :edit, :update, :destroy]
-  before_action :set_homework, only: [:new]
-  before_action :set_course_session_user, only: [:new]
-
+  before_action :set_student
+  before_action :set_homework_submission, only: [:new, :create, :show, :edit, :update, :destroy]
+  
   # GET /homework_submissions
   # GET /homework_submissions.json
   def index
@@ -16,7 +15,6 @@ class HomeworkSubmissionsController < ApplicationController
 
   # GET /homework_submissions/new
   def new
-    @homework_submission = @homework.homework_submissions.new
   end
 
   # GET /homework_submissions/1/edit
@@ -26,8 +24,8 @@ class HomeworkSubmissionsController < ApplicationController
   # POST /homework_submissions
   # POST /homework_submissions.json
   def create
-    @homework = Homework.find(params[:homework_submission][:homework_id])
-    @homework_submission = @homework.homework_submissions.build(homework_submission_params)
+    @homework_submission.pull_request = homework_submission_params[:pull_request]
+    @homework_submission.is_public = true
 
     respond_to do |format|
       if @homework_submission.save
@@ -67,19 +65,16 @@ class HomeworkSubmissionsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_homework_submission
-      @homework_submission = HomeworkSubmission.find(params[:id])
-    end
-
-    def set_homework
-      @homework = Homework.find(params[:format])
-    end
-
-    def set_course_session_user
-      @hcourse_session_user = User.find_by_id(params[:id])
+      if params[:id]
+        @homework_submission = HomeworkSubmission.find(params[:id])
+      else
+        homework_id = params[:homework_id] || homework_submission_params[:homework_id]
+        @homework_submission = HomeworkSubmission.find_or_initialize_by(homework_id:homework_id, course_session_participant:@student)
+      end  
     end
 
     # Only allow a list of trusted parameters through.
     def homework_submission_params
-      params.require(:homework_submission).permit(:course_session_user_id, :homework_id, :pull_request, :is_public)
+      params.require(:homework_submission).permit(:homework_id, :pull_request, :is_public)
     end
 end

@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
 
-  resources :homework_submissions
+  resources :homework_submissions 
   resources :lectures
   resources :course_sessions
-  resources :homeworks
+  resources :homeworks do
+    resources :homework_submissions
+  end
   resources :mentors
   resources :application_questions
 
