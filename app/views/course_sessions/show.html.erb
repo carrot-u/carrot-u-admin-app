@@ -30,7 +30,7 @@
             <p class="card-text"><%= lecture.lecture_content %></p>
             <p class="text-left"></p>
             <% if lecture.has_homework? %>
-              <%= link_to lecture.homework.content, homework_path(lecture.homework), class: "float-right" %>
+              <%= link_to "Homework: " + lecture.homework.content.to_s, homework_path(lecture.homework), class: "float-right" %>
             <% else %>
               <%= link_to 'Add Homework', new_homework_path(lecture.id), class: "float-right" if @current_user.admin %>
             <% end %>

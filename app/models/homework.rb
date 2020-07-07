@@ -13,6 +13,6 @@ class Homework < ApplicationRecord
   end
 
   def due_date_to_s
-    return self.due_date.strftime("%m-%d-%y")
+    return self.due_date&.strftime("%m-%d-%y")
   end
 end

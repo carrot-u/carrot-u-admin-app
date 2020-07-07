@@ -30,7 +30,7 @@
       <div class="card-footer">
         <div class="row">
           <div class="col-sm-6">
-            <a href="#" class="btn btn-success">Approve application</a>
+            <%= link_to "Approve application", approve_student_application_path(application), class: "btn btn-success",  :remote=>true,:method=>"PUT" %>
           </div>
           <div class="col-sm-6">
             <a href="#" class="btn btn-danger">Deny application</a>
