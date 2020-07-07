@@ -59,7 +59,7 @@ class HomeworksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def homework_params
-      params.require(:homework).permit(:content, :status, :due_date)
+      params.require(:homework).permit(:content, :description, :status, :due_date)
     end
 
 end
