@@ -11,17 +11,12 @@
     </div>
   <% end %>
   <div class="field">
-    <%= form.hidden_field :homework_id, value: params[:format] %>
+    <%= form.hidden_field :homework_id, value: @homework_submission.homework_id %>
   </div>
 
   <div class="field">
-    <%= form.label :homework_id %>
-    <%= @homework_submission.homework_id %>
-  </div>
-
-  <div class = "field">
-    <%= form.label :course_session_user_id %>
-    <%= @homework_submission.course_session_user_id %>
+    <%= form.label :homework %>
+    <%= @homework_submission.homework.description %>
   </div>
 
   <div class="field">

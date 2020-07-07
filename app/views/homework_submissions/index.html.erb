@@ -16,7 +16,7 @@
   <tbody>
     <% @homework_submissions.each do |homework_submission| %>
       <tr>
-        <td><%= homework_submission.course_session_user_id %></td>
+        <td><%= homework_submission.course_session_participant_id %></td>
         <td><%= homework_submission.homework_id %></td>
         <td><%= homework_submission.pull_request %></td>
         <td><%= homework_submission.is_public %></td>

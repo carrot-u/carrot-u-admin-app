@@ -11,6 +11,10 @@ class ApplicationController < ActionController::Base
     !current_user.nil?
   end
 
+  def set_student
+    @student = CourseSessionParticipant.student.find_or_initialize_by(user: current_user, course_session_id: 2) #@course_session)
+  end
+
   private
 
   def require_login

@@ -14,7 +14,7 @@ class HomeworkSubmissionsTest < ApplicationSystemTestCase
     visit homework_submissions_url
     click_on "New Homework Submission"
 
-    fill_in "Course session user", with: @homework_submission.course_session_user_id
+    fill_in "Course session user", with: @homework_submission.course_session_participant_id
     fill_in "Homework", with: @homework_submission.homework_id
     check "Is public" if @homework_submission.is_public
     fill_in "Pull request", with: @homework_submission.pull_request
@@ -28,7 +28,7 @@ class HomeworkSubmissionsTest < ApplicationSystemTestCase
     visit homework_submissions_url
     click_on "Edit", match: :first
 
-    fill_in "Course session user", with: @homework_submission.course_session_user_id
+    fill_in "Course session user", with: @homework_submission.course_session_participant_id
     fill_in "Homework", with: @homework_submission.homework_id
     check "Is public" if @homework_submission.is_public
     fill_in "Pull request", with: @homework_submission.pull_request
