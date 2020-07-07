@@ -8,7 +8,7 @@ class AdminsController < ApplicationController
       course_session: @course_session,
       application_complete: true,
       accepted_at: nil
-    ).joins(:application_answers, :user)
+    ).includes(:application_answers, :user)
 
     render "applications"
   end
