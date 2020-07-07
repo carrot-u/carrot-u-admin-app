@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_07_042546) do
+ActiveRecord::Schema.define(version: 2020_07_07_064558) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,19 +46,6 @@ ActiveRecord::Schema.define(version: 2020_07_07_042546) do
     t.index ["user_id"], name: "index_course_session_participants_on_user_id"
   end
 
-  create_table "course_session_users", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "course_session_id"
-    t.string "role"
-    t.boolean "notification_sent"
-    t.datetime "manager_approved_at"
-    t.datetime "accepted_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["course_session_id"], name: "index_course_session_users_on_course_session_id"
-    t.index ["user_id"], name: "index_course_session_users_on_user_id"
-  end
-
   create_table "course_sessions", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -68,7 +55,7 @@ ActiveRecord::Schema.define(version: 2020_07_07_042546) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "repository_link"
     t.bigint "lectures_id"
-    t.integer "status"
+    t.integer "status", default: 0, null: false
     t.index ["lectures_id"], name: "index_course_sessions_on_lectures_id"
   end
 
@@ -78,7 +65,6 @@ ActiveRecord::Schema.define(version: 2020_07_07_042546) do
     t.boolean "is_public"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "course_session_participant"
     t.bigint "course_session_participant_id"
     t.index ["homework_id"], name: "index_homework_submissions_on_homework_id"
   end
@@ -104,7 +90,7 @@ ActiveRecord::Schema.define(version: 2020_07_07_042546) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "course_session_id"
     t.datetime "schedule_date"
-    t.integer "topic"
+    t.integer "topic", default: 0, null: false
     t.index ["course_session_id"], name: "index_lectures_on_course_session_id"
     t.index ["homework_id"], name: "index_lectures_on_homework_id"
     t.index ["teacher_id"], name: "index_lectures_on_teacher_id"
