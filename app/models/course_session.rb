@@ -17,16 +17,6 @@ class CourseSession < ApplicationRecord
   }
 
   #
-  # Class methods
-  #
-  class << self
-    def accepting_applications
-      CourseSession.where("status = ?",statuses["admissions"]).
-        order("start_date ASC")
-    end
-  end
-
-  #
   # Instance methods
   #
   def start_to_s

@@ -1,33 +1,3 @@
-<div class="container mx-auto">
-    <p id="notice"><%= notice %></p>
-    <div class="card bg-white mb-3" style="max-width: 100rem;">
-        <div class="card-header">
-            Lecture: <%= @homework.get_lecture_name %>
-            <% if @current_user.admin %>
-                <%= link_to fa_icon("edit"), edit_homework_path(@homework), class: "float-right px-3" %>
-            <% end %>
-        </div>
-        <div class="card-title p-3">
-            <h5>Assignment: <%= @homework.content %></h5> 
-            <br>
-            <p class="text=left">
-                <strong>Description:</strong><br>
-                <%= @homework.description %>
-            </p>
-            <p class="text-left">
-                <strong>Status:</strong><br>
-                <%= @homework.status %>
-            </p>
-            <p class="text-left">
-                <strong>Due Date:</strong><br>
-                <%= @homework.due_date_to_s %>
-            </p>
-        </div>
-    </div>
-    <div class = "card px-3 py-3 mb-3">
-        <%= link_to 'Submit Homework', new_homework_homework_submission_path(homework_id: @homework.id), class: "btn btn-primary" %>
-    </div>
-</div>
+<%= render 'homework_card', homework: @homework %>
 
-
-<%= link_to 'Back', course_session_path(@homework.get_course_session_id) %>
+<%= link_to 'Course Session', course_session_path(@homework.get_course_session_id) %>

@@ -92,7 +92,7 @@ class StudentsController < ApplicationController
   end
 
   def set_open_course_session
-    @course_session = CourseSession.accepting_applications.first
+    @course_session = CourseSession.admissions.first
   end
 
   def set_student
