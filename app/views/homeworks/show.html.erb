@@ -8,16 +8,18 @@
             <% end %>
         </div>
         <div class="card-title p-3">
-            <h5>Assignment:</h5> 
+            <h5>Assignment: <%= @homework.content %></h5> 
+            <br>
             <p class="text=left">
-                <%= @homework.content %>
+                <strong>Description:</strong><br>
+                <%= @homework.description %>
             </p>
             <p class="text-left">
-                <strong>Status:</strong>
+                <strong>Status:</strong><br>
                 <%= @homework.status %>
             </p>
             <p class="text-left">
-                <strong>Due Date:</strong>
+                <strong>Due Date:</strong><br>
                 <%= @homework.due_date_to_s %>
             </p>
         </div>
