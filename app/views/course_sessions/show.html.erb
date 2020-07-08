@@ -1,6 +1,6 @@
 <div class="container mb-auto py-3 text-center">
     <h1><%= @course_session.name %></h1>
-    <h3><%= @course_session.description %></h3>
+    <p><%= @course_session.description %></p>
     <%= link_to fa_icon("github"), @course_session.repository_link %> |
     <% if @current_user.admin %>
       <%= link_to 'Edit', edit_course_session_path(@course_session) %> |
