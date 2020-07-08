@@ -5,8 +5,6 @@
     <h2>Student Waitlist</h2>
     <p>The following students are currently waiting for a session of Carrot U</p>
   </div>
-
-  <% @waiting_list.each do |waiting_list| %>
     <table class="container table">
       <thead>
         <tr>
@@ -15,11 +13,12 @@
         </tr>
       </thead>
       <tbody>
+        <% @waiting_list.each do |waiting_list| %>
         <tr>
           <td><%= waiting_list.user.email %></td>
           <td><%= waiting_list.created_at %></td>
         </tr>
+        <% end %>
       </tbody>
     </table>
-  <% end %>
 <% end %>
