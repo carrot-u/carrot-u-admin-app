@@ -1,4 +1,10 @@
-<h1>New Homework Submission</h1>
+<div class="container mb-auto py-3 text-center">
+  <h2>New Homework Submission</h2>
+</div>
 
-<%= render 'form', homework_submission: @homework_submission %>
+<div class="container d-flex justify-content-center">
+    <%= render 'form', homework_submission: @homework_submission %>
+</div>
+
+<%= link_to 'Back', homework_path(@homework_submission.homework)%>
 
