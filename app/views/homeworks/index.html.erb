@@ -1,8 +1,9 @@
 <p id="notice"><%= notice %></p>
+<div class="container mb-auto py-3 text-center">
+  <h1>Homework Assignments</h1>
+</div>
 
-<h1>Homework Assignments</h1>
-
-<% @homeworks.each do |homework| %>
+<% @homeworks.order('due_date ASC').each do |homework| %>
   <%= render "homework_card", homework: homework %>
 <% end %>
 
