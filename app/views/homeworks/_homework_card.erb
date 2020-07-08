@@ -43,9 +43,9 @@
       </div>
     </div>
     <div class = "card-footer">
-      <% if current_student? %> %>
+      <% if current_student? %>
         <%= link_to 'Submit', new_homework_homework_submission_path(homework_id: homework.id), class: "btn btn-primary float-right" %>
-      <% end %> %>
+      <% end %>
     </div>
   </div>
 </div>
