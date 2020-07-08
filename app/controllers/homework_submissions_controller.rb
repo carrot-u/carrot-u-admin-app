@@ -25,6 +25,7 @@ class HomeworkSubmissionsController < ApplicationController
   def create
     @homework_submission.pull_request = homework_submission_params[:pull_request]
     @homework_submission.is_public = true
+    @homework_submission.user_id = current_user.id
 
     respond_to do |format|
       if @homework_submission.save
@@ -75,6 +76,6 @@ class HomeworkSubmissionsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def homework_submission_params
-    params.require(:homework_submission).permit(:homework_id, :pull_request, :is_public)
+    params.require(:homework_submission).permit(:homework_id, :pull_request, :is_public, :user_id)
   end
 end

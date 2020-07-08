@@ -7,4 +7,5 @@
 </div>
 
 <%= link_to 'Show', @homework_submission %> |
-<%= link_to 'Back', homework_submissions_path %>
+<%= link_to 'Course Session', course_session_path(@homework_submission.course_session_participant.course_session_id) %> |
+<%= link_to 'Homeworks', homeworks_path %>
