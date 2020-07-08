@@ -1,16 +1,17 @@
+<div id="notice"><%= notice %></div>
+
 <div class="container mb-auto py-3 text-center">
     <h1><%= @course_session.name %></h1>
-    <h3><%= @course_session.description %></h3>
+    <p><%= @course_session.description %></p>
     <%= link_to fa_icon("github"), @course_session.repository_link %> |
     <% if @current_user.admin %>
-      <%= link_to 'Edit', edit_course_session_path(@course_session) %> |
+      <%= link_to 'edit session', edit_course_session_path(@course_session) %> |
 
     <% end %>
-    <%= link_to 'Back', course_sessions_path %>
+    <%= link_to 'sessions list', course_sessions_path %>
 </div>
 
 <div class="container mx-auto">
-  <p id="notice"><%= notice %></p>
   <% @course_session.lectures.order('schedule_date ASC').each do |lecture| %>
     <div class="card mb-3" style="max-width: 100rem;">
       <div class="row no-gutters">
