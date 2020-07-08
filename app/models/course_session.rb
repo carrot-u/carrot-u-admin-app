@@ -26,6 +26,8 @@ class CourseSession < ApplicationRecord
   #
   # Instance methods
   #
+
+  # careful with using this, make sure the call site fits the context
   def start_to_s
     if !self.start_date?
       "Session start date has not been scheduled."

@@ -6,7 +6,7 @@
 <% if @course_session %>
   <div class="alert alert-success">
     <p>
-      There is a session of Carrot U starting on <%= @course_session.start_to_s %>.
+      Next Session <%= @course_session.start_to_s %>.
     </p>
     <% if !@student.pending? %>
       <p>
