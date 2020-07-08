@@ -2,31 +2,50 @@
   <p id="notice"><%= notice %></p>
   <div class="card bg-white mb-3" style="max-width: 100rem;">
     <div class="card-header">
-      Lecture: <%= homework.get_lecture_name %>
-      <% if @current_user.admin %>
-        <%= link_to fa_icon("edit"), edit_homework_path(homework), class: "float-right px-3" %>
-      <% end %>
+      <div class="row no-gutters">
+        <div class="col">
+          <h5>Lecture: <%= homework.get_lecture_name %></h5>
+        </div>
+        <div class="col">
+          <% if @current_user.admin %>
+            <%= link_to fa_icon("edit"), edit_homework_path(homework), class: "float-right px-10" %>
+          <% end %>
+        </div>
+      </div>
     </div>
     <div class="card-title p-3">
-      <h5>Assignment: <%= homework.content %></h5>
-      <br>
-      <p class="text=left">
-        <strong>Description:</strong><br>
-        <%= homework.description %>
-      </p>
-      <p class="text-left">
-        <strong>Status:</strong><br>
-        <%= homework.status %>
-      </p>
-      <p class="text-left">
-        <strong>Due Date:</strong><br>
-        <%= homework.due_date_to_s %>
-      </p>
+      <div class="row no-gutters">
+        <div class="col">
+          <h5>Assignment: <%= homework.content %></h5>
+        </div>
+      </div>
+       <div class="row no-gutters">
+         <div class="col">
+          <p class="text-left">
+            <strong>Description:</strong><br>
+            <%= homework.description %>
+          </p>
+        </div>
+      </div>
+      <div class="row no-gutters">
+        <div class="col">
+          <p class="text-left">
+            <strong>Status:</strong><br>
+            <%= homework.status %>
+          </p>
+        </div>
+        <div class="col">
+          <p class="text-right">
+            <strong>Due Date:</strong><br>
+             <%= homework.due_date_to_s %>
+          </p>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class = "card px-3 py-3 mb-3">
-    <% if current_student? %>
-      <%= link_to 'Submit Homework', new_homework_homework_submission_path(homework_id: homework.id), class: "btn btn-primary" %>
-    <% end %>
+    <div class = "card-footer">
+      <% if current_student? %>
+        <%= link_to 'Submit', new_homework_homework_submission_path(homework_id: homework.id), class: "btn btn-primary float-right" %>
+      <% end %>
+    </div>
   </div>
 </div>
