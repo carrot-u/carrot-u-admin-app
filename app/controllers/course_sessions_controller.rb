@@ -34,11 +34,18 @@ class CourseSessionsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /lectures/1
-  # PATCH/PUT /lectures/1.json
+  # PATCH/PUT /course_sessions/1
+  # PATCH/PUT /course_sessions/1.json
   def update
     respond_to do |format|
       if @course_session.update(course_session_params)
+        # send an email here if the session is open for applications
+        if @course_session.admissions?
+          WaitingList.current.each do |waiting_list|
+            CourseSessionMailer.with(course_session: @course_session, user: waiting_list.user).session_open_email.deliver_later
+            waiting_list.update(course_session: @course_session)
+          end
+        end
         format.html { redirect_to @course_session, notice: 'Course session was successfully updated.' }
         format.json { render :show, status: :ok, location: @course_session }
       else
