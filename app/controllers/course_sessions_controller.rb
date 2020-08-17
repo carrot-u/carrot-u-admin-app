@@ -41,10 +41,7 @@ class CourseSessionsController < ApplicationController
       if @course_session.update(course_session_params)
         # send an email here if the session is open for applications
         if @course_session.admissions?
-          WaitingList.current.each do |waiting_list|
-            CourseSessionMailer.with(course_session: @course_session, user: waiting_list.user).session_open_email.deliver_later
-            waiting_list.update(course_session: @course_session)
-          end
+          WaitingList.notify_course_session_open(@course_session)
         end
         format.html { redirect_to @course_session, notice: 'Course session was successfully updated.' }
         format.json { render :show, status: :ok, location: @course_session }
